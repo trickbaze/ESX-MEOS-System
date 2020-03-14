@@ -1,0 +1,29 @@
+RewriteEngine On
+
+
+
+RewriteRule ^index$ index.php
+RewriteRule ^basisadministratie$ basisadministratie.php
+RewriteRule ^gegevens$ gegevens.php
+RewriteRule ^voertuigregistratie$ voertuigregistratie.php
+RewriteRule ^voertuiginformatie$ voertuiginformatie.php
+RewriteRule ^gebruikers$ users.php
+RewriteRule ^login$ login.php
+RewriteRule ^zoek$ zoek.php
+RewriteRule ^aangifte$ aangifte.php
+RewriteRule ^gms$ gms.php
+RewriteRule ^aangiftes$ aangiftes.php
+RewriteRule ^aangifteafschrift$ aangifteafschrift.php
+RewriteRule ^jaillog$ jaillog.php
+RewriteRule ^boete$ boete.php
+RewriteRule ^vrijeboete$ vrijeboete.php
+RewriteRule ^huiszoekingafschrift$ huiszoekingafschrift.php
+RewriteRule ^rdw$ rdw.php
+RewriteRule ^beveiligingscentrum$ beveiligingscentrum.php
+RewriteRule ^training$ training.php
+RewriteRule ^indexveh$ indexveh.php
+RewriteRule ^cjib$ cjib.php
+RewriteRule ^cjib_dossier$ cjib_dossier.php
+RewriteRule ^cjib_herinnering$ cjib_herinnering.php
+RewriteRule ^i8$ i8.php
+RewriteRule ^geti8$ geti8.php
