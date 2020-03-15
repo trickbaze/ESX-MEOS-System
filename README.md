@@ -2,7 +2,8 @@
 
 Updates & Bugfixes
 
-* Google Authenicator 
+* Google Authenicator
+* Disclaimer popup bij login scherm
 
 ![meos1](https://user-images.githubusercontent.com/50376296/76698569-e623d880-66a4-11ea-9787-5237595f9635.png)
 
