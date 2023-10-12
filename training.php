@@ -302,7 +302,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			<select id="specialisatieSelector" onchange="document.location.href='?getSpecialisatieFormgetSpecialisatie='+document.getElementById('specialisatieSelector').value;" class="form-control" name="getSpecialisatie">
 				<option disabled <?php if (!isset($_GET['getSpecialisatieFormgetSpecialisatie'])) { ?> selected <?php  } ?>>Maak een keuze...</option>
 				<?php 
-				while ($row = $getAllTraining->fetch_assoc()) {
+				while ($row = $getAllTraining2->fetch_assoc()) {
 					?>
 						<option <?php if (@$_GET['getSpecialisatieFormgetSpecialisatie'] == $row['id']) { echo "selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?> (<?php echo $row['short']; ?>) - <?php echo str_replace("<br>"," - ",$row['docent']); ?>
 					<?php
