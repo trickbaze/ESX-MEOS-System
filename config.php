@@ -5,6 +5,9 @@ session_start();
 
 ini_set("max_execution_time",500);
 
+error_reporting(0);
+
+
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
@@ -16,7 +19,7 @@ $dd = array(
 "host" => "localhost",
 "user" => "root",
 "pass" => "",
-"data" => "fivem"
+"data" => "esxlegacy_22eb04"
 );
 
 $ddcon = new mysqli($dd['host'],$dd['user'],$dd['pass'],$dd['data']);

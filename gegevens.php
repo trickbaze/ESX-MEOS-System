@@ -145,15 +145,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	}
 }
 
-$mensenq = $ddcon->query("SELECT firstname, lastname, dateofbirth, aid, sex, height, job_grades.label as jobrank, jobs.label as job, users.identifier as identifier FROM users INNER JOIN job_grades ON (users.job = job_grades.job_name AND users.job_grade = job_grades.grade) INNER JOIN jobs ON users.job = jobs.name WHERE aid= '".$ddcon->real_escape_string($_GET['id'])."' LIMIT 1");
+$mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth, sex, height, jobs.label as job, users.identifier as identifier FROM users INNER JOIN job_grades ON (users.job = job_grades.job_name AND users.job_grade = job_grades.grade) INNER JOIN jobs ON users.job = jobs.name WHERE identifier= '".$ddcon->real_escape_string($_GET['id'])."' LIMIT 1");
 $row = $mensenq->fetch_assoc();
 
 $steamid = $row['identifier'];
 
 $notities = $con->query("SELECT * FROM informatie WHERE gameid = '".$con->real_escape_string($_GET['id'])."' ORDER BY id DESC");
-$voertuigen = $ddcon->query("SELECT id,plate,vehicle,vehicle_model FROM owned_vehicles WHERE owner = '".$row['identifier']."'");
+$voertuigen = $ddcon->query("SELECT owner, plate,vehicle, type FROM owned_vehicles WHERE owner = '".$row['identifier']."'");
 
-$aid = $row['aid'];
+$identifier = $row['identifier'];
 //var_dump($voertuigen);
 //exit;
 
@@ -322,12 +322,10 @@ if ($checkSig->num_rows != 0) {
 			<hr>
 			<em>Baan:</em><br>
 			<input type="text" class="form-control" value="<?php echo htmlspecialchars($row['job']); ?>" readonly><br>
-			<em>Functie:</em><br>
-			<input type="text" class="form-control" value="<?php echo htmlspecialchars($row['jobrank']); ?>" readonly><br>
 			<hr>
 			<em>Rijvaardigheidsbewijzen:</em><br>
 			<textarea rows="4" class="form-control" readonly><?php echo htmlspecialchars($rijbewijzen); ?></textarea>
-			<?php if (@$_SESSION['rang'] != "G4S") {?><br><a class="btn btn-danger" href="?action=invorderen&owner=<?php echo $row['identifier']; ?>&persoon=<?php echo $aid; ?>">Invorderen</a><br><?php } ?><br>
+			<?php if (@$_SESSION['rang'] != "G4S") {?><br><a class="btn btn-danger" href="?action=invorderen&owner=<?php echo $row['identifier']; ?>&persoon=<?php echo $identifier; ?>">Invorderen</a><br><?php } ?><br>
 			<?php if (@$_SESSION['role'] == "admin") {
 			?>
 				<!--<a class="btn btn-primary" href="huiszoekingafschrift?id=<?php echo $_GET['id']; ?>">Huiszoeking uitvoeren</a><br>
@@ -341,7 +339,7 @@ if ($checkSig->num_rows != 0) {
 		<?php if (@$_SESSION['rang'] != "G4S") {?>
 		<form method="POST">
 		<input type="hidden" name="form" value="notitie">
-		<input type="hidden" name="gameid" value="<?php echo $row['aid']; ?>">
+		<input type="hidden" name="gameid" value="<?php echo $row['identifier']; ?>">
 		<div class="col-sm-2"><input required name="verbalisant" class="form-control" type="text" value="<?php echo htmlspecialchars($_SESSION['name']); ?>" readonly></div><div class="col-sm-2"><input required name="datum" class="form-control" type="date"></div>
 		<div class="col-sm-2"><input required name="sanctie" class="form-control" type="text" placeholder="Sanctie"></div>
 		<div style="padding-left: 20px;">Signaleren</div>
@@ -387,7 +385,7 @@ if ($checkSig->num_rows != 0) {
 			<td><?php echo $row['datum']; ?></td> 
 			<td onclick="alert('<?php echo addslashes($meuk); ?>');"><?php echo substr($row['notitie'],0,50); if (strlen($row['notitie']) > 49) { echo "..."; } ?> </td>
 			<td><?php echo $row['sanctie']; ?></td> 
-			<?php if ($_SESSION['role'] == "admin") { ?><td><a href="?action=delete&verbaal=<?php echo $row['id']; ?>&persoon=<?php echo $aid; ?>">Verwijderen</a></td><?php } ?>
+			<?php if ($_SESSION['role'] == "admin") { ?><td><a href="?action=delete&verbaal=<?php echo $row['id']; ?>&persoon=<?php echo $identifier; ?>">Verwijderen</a></td><?php } ?>
 		  </tr>
 		  <?php 
 		  }
@@ -433,8 +431,8 @@ if ($checkSig->num_rows != 0) {
 		  <tr>
 			<td><a href="rdw?kenteken=<?php echo $roww['plate']; ?>"><?php echo $roww['plate']; ?></a></td>
 			<td><?php echo $status; ?> <?php if ($statusplain == "Afgekeurd") { ?>(<?php echo $t['date']; ?>)<?php } ?></td>
-			<td><?php echo $roww['vehicle_model']; ?></td>
-			<?php if ($_SESSION['role'] == "admin") { ?><td><a onclick="if (!confirm('Wil je dit voertuig in beslag nemen? Deze actie kan je niet omdraaien!')) { return false }" href="?action=beslag&id=<?php echo $roww['id']; ?>&user=<?php echo $steamid ?>&kenteken=<?php echo $vehicle->plate; ?>&voertuig=<?php echo $vehicle->model; ?>&persoon=<?php echo $aid; ?>">In beslag nemen</a></td><?php } ?>
+			<td><?php echo $roww['type']; ?></td>
+			<?php if ($_SESSION['role'] == "admin") { ?><td><a onclick="if (!confirm('Wil je dit voertuig in beslag nemen? Deze actie kan je niet omdraaien!')) { return false }" href="?action=beslag&id=<?php echo $roww['owner']; ?>&user=<?php echo $steamid ?>&kenteken=<?php echo $vehicle->plate; ?>&voertuig=<?php echo $vehicle->model; ?>&persoon=<?php echo $identifier; ?>">In beslag nemen</a></td><?php } ?>
 		  </tr>
 		  <?php 
 		  //unset($vehicle);
@@ -450,7 +448,7 @@ if ($checkSig->num_rows != 0) {
 			$totaalboetesrow = $totaalboetes->fetch_assoc();
 		?>
 		<h2>Openstaande bekeuringen (&euro;<?php if ($totaalboetesrow['a'] == null) { echo "0"; } else { echo $totaalboetesrow['a']; } ?>)</a></h2>
-		<a class="btn btn-primary" href="/boete?persoon=<?php echo $_GET['id']; ?>">Verbaal aanzeggen</a> &nbsp; <?php if ($_SESSION['role'] == "admin") { ?><a href="?action=delfine&id=all&persoon=<?php echo $aid; ?>&steam=<?php echo $steamid; ?>" class="btn btn-danger">Alles verwijderen</a><?php } ?><br>
+		<a class="btn btn-primary" href="/boete?persoon=<?php echo $_GET['identifier']; ?>">Verbaal aanzeggen</a> &nbsp; <?php if ($_SESSION['role'] == "admin") { ?><a href="?action=delfine&id=all&persoon=<?php echo $identifier; ?>&steam=<?php echo $steamid; ?>" class="btn btn-danger">Alles verwijderen</a><?php } ?><br>
 		<table id="badm" class="table">
 		  <tr>
 			<th>Volgnummer</th>
@@ -461,7 +459,7 @@ if ($checkSig->num_rows != 0) {
 		  </tr>
 		  <?php
 
-		  $boetesq = $ddcon->query("SELECT id,label,amount,sender FROM billing WHERE identifier = '".$steamid."' AND target = 'society_police'");
+		  $boetesq = $ddcon->query("SELECT id, identifier, sender, target_type, target, label, amount FROM billing WHERE identifier = '".$steamid."' AND target = 'society_police'");
 
 		  while ($row = $boetesq->fetch_assoc()) {
 		  if (substr($row['sender'],0,6) == "steam:") {
@@ -481,19 +479,12 @@ if ($checkSig->num_rows != 0) {
 			<td><?php echo $row['label']; ?></td>
 			<td><?php echo $verbalisant; ?></td>
 			<td>&euro; <?php echo $row['amount']; ?></td>
-			<?php if ($_SESSION['role'] == "admin") { ?><td><a href="?action=delfine&id=<?php echo $row['id']; ?>&persoon=<?php echo $aid; ?>">Verwijderen</a></td><?php } ?>
+			<?php if ($_SESSION['role'] == "admin") { ?><td><a href="?action=delfine&id=<?php echo $row['id']; ?>&persoon=<?php echo $identifier; ?>">Verwijderen</a></td><?php } ?>
 		  </tr>
 		  <?php 
 		  }
 		  ?>
 		</table>
-		<hr>
-		<h2>Kladblok</h2>
-		<form method="POST">
-			<input type="hidden" name="form" value="kladblok">
-			<textarea name="kladblok" class="form-control" placeholder="Dit is een blanco kladblok..."><?php echo htmlspecialchars($rowKladblok['text']); ?></textarea>
-			<input type="submit" class="btn btn-success" value="Opslaan">
-		</form>
 	  </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
