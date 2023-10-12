@@ -9,13 +9,7 @@ $hvs = $ddcon->query("SELECT * FROM users WHERE job = 'police' OR job = 'ambulan
 $gev = $ddcon->query("SELECT * FROM jail");
 $voe = $ddcon->query("SELECT * FROM owned_vehicles");
 $moncon = $ddcon->query("SELECT sum(money) as tot FROM users");
-$monconr = $moncon->fetch_assoc();
-
-$monban = $ddcon->query("SELECT sum(bank) as tot FROM users");
-$monbanr = $monban->fetch_assoc();
-
 $openb = $ddcon->query("SELECT sum(amount) as tot FROM billing WHERE target='society_police'");
-$openbr = $openb->fetch_assoc();
 
 $logc = $con->query("SELECT * FROM livelog");
 
@@ -194,7 +188,7 @@ $specialisaties = $con->query("SELECT specialisaties FROM users WHERE id = '".$_
       </div>
       <h1>
 	  Welkom <?php echo $_SESSION['name']; ?><br>
-    In het MEOS systeem van SERVERNAME
+    In het MEOS systeem van Server
   
 	  </h1>
 	  <b><u>Dit systeem is uitsluitend voor geautoriseerd gebruik. Misbruik van dit systeem kan leiden tot ontslag en/of strafvervolging</u></b><br>
@@ -220,34 +214,6 @@ $specialisaties = $con->query("SELECT specialisaties FROM users WHERE id = '".$_
 	  ?>
 	  <?php } ?>
 	  
-	  
-	  
-	  <?php if ($_SESSION['role'] != "anwb") { ?>
-	  Hallo <?php echo $_SESSION['name']; ?>, welkom in MEOS vandaag.
-	  <?php if ($specialisaties->num_rows>0) { ?> <br>Momenteel ben je in het bezit van de volgende specialisaties: <?php echo $specialisaties->fetch_assoc()['specialisaties']; } ?>
-	  <br>
-	  <?php } ?>
-	  
-	  
-	  
-	  <hr>
-	  <?php
-	  if ($_SESSION['role'] != "anwb") {
-	  ?>
-	  Op het moment zijn er <b> <?php echo $inw->num_rows; ?></b> ingeschreven inwoners in de Gemeente Meerstad<br>
-	  <hr>
-	  In de gemeente Meerstad zijn <b> <?php echo $voe->num_rows; ?></b> geregistreerde voertuigen <br>
-	  <hr>
-	  Op het moment beheren alle inwoners intotaal <b> &euro;<?php echo number_format($monconr['tot'],2,",","."); ?> </b> aan contant geld.
-    <hr>
-	  Op het moment beheren alle inwoners intotaal <b> &euro;<?php echo number_format($monbanr['tot'],2,",","."); ?> </b> op hun bankrekeningen <br>
-	  <hr>
-	  Momenteel zijn er <b> <?php echo $gev->num_rows; ?> </b>  burgers die veroordeeld zijn,<br>
-	  <hr>
-	  Op het moment hebben alle burgers intotaal <b> &euro;<?php echo number_format($openbr['tot'],2,",","."); ?> </b>  aan boetes open staan<br>
-	  <br>
-	  <?php } ?>
-	  <hr>
 	  <h1>Logboek</h1><br>
 	  <div class="list-group">
 	  <?php

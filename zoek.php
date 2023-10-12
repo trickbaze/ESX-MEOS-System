@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	}
 }
 
-$mensenq = $ddcon->query("SELECT firstname, lastname, dateofbirth, aid FROM users WHERE LOWER(firstname) LIKE LOWER('%".$con->real_escape_string($_GET['q'])."%') OR LOWER(lastname) LIKE LOWER('%".$con->real_escape_string($_GET['q'])."%') OR LOWER(concat(firstname, ' ', lastname)) LIKE LOWER('%".$con->real_escape_string($_GET['q'])."%') ORDER BY lastname DESC");
+$mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth FROM users WHERE LOWER(firstname) LIKE LOWER('%".$con->real_escape_string($_GET['q'])."%') OR LOWER(lastname) LIKE LOWER('%".$con->real_escape_string($_GET['q'])."%') OR LOWER(concat(firstname, ' ', lastname)) LIKE LOWER('%".$con->real_escape_string($_GET['q'])."%') ORDER BY lastname DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -141,17 +141,15 @@ $mensenq = $ddcon->query("SELECT firstname, lastname, dateofbirth, aid FROM user
 			<th>Achternaam</th> 
 			<th>Voornaam</th>
 			<th>Geboortedatum</th>
-			<th>ID</th>
 		  </tr>
 		  <?php
 		  while ($row = $mensenq->fetch_assoc()) {  
 		  ?>
 		  <tr>
-			<td><a href="gegevens?id=<?php echo $row['aid']; ?>">Muteren</a></td>
+			<td><a href="gegevens?id=<?php echo $row['identifier']; ?>">Muteren</a></td>
 			<td><?php echo htmlspecialchars($row['lastname']); ?></td> 
 			<td><?php echo htmlspecialchars($row['firstname']); ?></td>
 			<td><?php echo htmlspecialchars($row['dateofbirth']); ?></td>
-			<td><?php echo $row['aid']; ?></td>
 		  </tr>
 		  <?php 
 		  }
