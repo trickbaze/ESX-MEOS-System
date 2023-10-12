@@ -306,6 +306,8 @@ if ($checkSig->num_rows != 0) {
 			<?php if ($signalering['status'] == true) { ?>
 			<div class="alert alert-danger"><h3><b>Gesignaleerd persoon i.v.m: </b><?php echo $signalering['notitie']; ?> <a href="?action=designal&gameid=<?php echo $_GET['id']; ?>"> >>Signalering Intrekken</a></h3></div>
 			<?php } ?>
+			<h2>Persoonsgegevens</h2>
+			<hr>
 			<em>Voornaam:</em><br>
 			<input type="text" class="form-control" value="<?php echo htmlspecialchars($row['firstname']); ?>" readonly><br>
 			<em>Achternaam:</em><br>
@@ -335,28 +337,20 @@ if ($checkSig->num_rows != 0) {
 		</form>
 		<?php if (@$_SESSION['rang'] != "G4S") {?>
 		<form method="POST">
+		<h2>Notitie aanmaken</h2>
+		<hr>
 		<input type="hidden" name="form" value="notitie">
 		<input type="hidden" name="gameid" value="<?php echo $row['identifier']; ?>">
 		<div class="col-sm-2"><input required name="verbalisant" class="form-control" type="text" value="<?php echo htmlspecialchars($_SESSION['name']); ?>" readonly></div><div class="col-sm-2"><input required name="datum" class="form-control" type="date"></div>
 		<div class="col-sm-2"><input required name="sanctie" class="form-control" type="text" placeholder="Sanctie"></div>
-		<div style="padding-left: 20px;">Signaleren</div>
-		<div style="margin-left: -1390px; margin-top: -20px;"><input name="gesignaleerd" class="form-control" type="checkbox" value=""></div>
+		<div class="form-check">
+			<input style="margin-left: -5px;" type="checkbox" class="form-check-input" name="gesignaleerd" value="" id="exampleCheck1">
+			<label style="padding-left: 15px;" class="form-check-label" for="exampleCheck1">Signaleren</label>
+		</div>
 		<br>
 		<div class="col-sm-12"><textarea required name="notitie" placeholder="Beschrijf incident / notitie" class="form-control"></textarea></div><br>
 		<input type="submit" class="btn btn-success btn-block" value="Opslaan">
 		</form>
-		<?php } ?>
-		<hr>
-		<?php if (@$_SESSION['rang'] != "G4S") {?>
-		<!--<form method="POST">
-			Wanneer iemand de stad heeft verlaten kan je hem via deze optie opsluiten. Dit werkt <b><u>uitsluitend</u></b> als de persoon de stad al uit is<br>
-			<em><b>Gevangenistijd (seconde):</b></em>
-			<input type="hidden" name="form" value="jail">
-			<input type="hidden" name="persoon" value="<?php //echo $_GET['id']; ?>">
-			<input type="hidden" name="steam" value="<?php //echo $row['identifier']; ?>">
-			<input type="number" name="time" class="form-control"><br>
-			<input type="submit" value="Opsluiten" class="btn btn-danger btn-block">
-		</form>-->
 		<?php } ?>
 		<hr>
 		<h2>Notities</h2>
@@ -444,8 +438,13 @@ if ($checkSig->num_rows != 0) {
 			$totaalboetes = $ddcon->query("SELECT sum(amount) as a FROM billing WHERE identifier = '".$steamid."' AND target = 'society_police'");
 			$totaalboetesrow = $totaalboetes->fetch_assoc();
 		?>
+		
 		<h2>Openstaande bekeuringen (&euro;<?php if ($totaalboetesrow['a'] == null) { echo "0"; } else { echo $totaalboetesrow['a']; } ?>)</a></h2>
-		<a class="btn btn-primary" href="/boete?persoon=<?php echo $_GET['identifier']; ?>">Verbaal aanzeggen</a> &nbsp; <?php if ($_SESSION['role'] == "admin") { ?><a href="?action=delfine&id=all&persoon=<?php echo $identifier; ?>&steam=<?php echo $steamid; ?>" class="btn btn-danger">Alles verwijderen</a><?php } ?><br>
+		<a class="btn btn-primary" href="/boete?persoon=<?php echo $_GET['identifier']; ?>">Verbaal aanzeggen</a>
+		 &nbsp; 
+		 <?php if ($_SESSION['role'] == "admin") { ?><a href="?action=delfine&id=all&persoon=<?php echo $identifier; ?>&identifier=
+		 <?php echo $steamid; ?>" class="btn btn-danger">Alles verwijderen</a><?php } ?><br>
+		<br>
 		<table id="badm" class="table">
 		  <tr>
 			<th>Volgnummer</th>
@@ -456,10 +455,10 @@ if ($checkSig->num_rows != 0) {
 		  </tr>
 		  <?php
 
-		  $boetesq = $ddcon->query("SELECT id, identifier, sender, target_type, target, label, amount FROM billing WHERE identifier = '".$steamid."' AND target = 'society_police'");
+		  $boetesq = $ddcon->query("SELECT id, identifier, sender, target_type, target, label, amount FROM billing WHERE identifier = '".$identifier."' AND target = 'society_police'");
 
 		  while ($row = $boetesq->fetch_assoc()) {
-		  if (substr($row['sender'],0,6) == "steam:") {
+		  if (substr($row['sender'],0,6) == "identifier:") {
 			  $verbalisantq = $ddcon->query("SELECT CONCAT(LEFT(UCASE(firstname),1),'.',UCASE(lastname)) as verbalisant FROM users WHERE identifier = '".$row['sender']."'");
 			  $vrow = $verbalisantq->fetch_assoc();
 			  $varbalisant = $vrow['verbalisant'];
