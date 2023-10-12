@@ -31,10 +31,13 @@ $ddg = array(
 "data" => ""
 );
 
+
+$site_title = "Server | MEOS Systeem";
+$browser_color = "#004682";
+
+# Don't toch this
 require "GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator();
-
-$browser_color = "#004682";
 
 if (isset($_SESSION['id'])) {
 	$q = $con->query("SELECT status FROM users WHERE id = '".$_SESSION['id']."' AND status = 'active'");

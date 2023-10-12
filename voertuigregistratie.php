@@ -39,87 +39,73 @@ if ($_SESSION['rang'] == "G4S") {
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="/">Voertuigregistratie | MEOS</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index">
-            <i class="fa fa-fw fa-home"></i>
-            <span class="nav-link-text">Homepagina</span>
-          </a>
-        </li>
-		<?php if ($_SESSION['role'] != "anwb") { ?>
-		<?php } ?>
-		<?php if ($_SESSION['role'] != "anwb") { ?>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="basisadministratie">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Basisadministratie</span>
-          </a>
-        </li>
-		<?php } ?>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="voertuigregistratie">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text"><u>Voertuigregistratie</u></span>
-          </a>
-        </li>
-		<?php if (@$_SESSION['cjib'] == 1) { ?>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="cjib">
-            <i class="fa fa-fw fa-list"></i>
-            <span class="nav-link-text">CJIB</span>
-          </a>
-        </li>
-		<?php } ?>
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="/intranet">
-            <i class="fa fa-folder"></i>
-            <span class="nav-link-text">Intranet</span>
-          </a>
-        </li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="training">
-            <i class="fa fa-fw fa-book"></i>
-            <span class="nav-link-text">Training</span>
-          </a>
-        </li>
-		<?php if ($_SESSION['role'] != "anwb") { ?>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="aangiftes">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Aangifteadministratie</span>
-          </a>
-        </li>
-		<?php } ?>
-				<?php if ($_SESSION['role'] == "admin") { ?>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="gebruikers">
-            <i class="fa fa-fw fa-user-circle"></i>
-            <span class="nav-link-text">Gebruikersadministratie</span>
-          </a>
-        </li>
-		
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="jaillog">
-            <i class="fa fa-fw fa-history"></i>
-            <span class="nav-link-text">Logboeken</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="exit.php">
-            <i class="fa fa-sign-out"></i>
-            <span class="nav-link-text">Uitloggen</span>
-          </a>
-        </li>
-		<?php } ?>
-      </ul>
-    </div>
-  </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-red fixed-top" id="mainNav">
+         <a class="navbar-brand" href="#"><img id="logo-meos" src="img/logo.png"></a>
+         <p id="header-text">MEOS</p>
+         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+              <!-- Default user section-->
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                  <a class="nav-link" href="#">
+                  <i class="fa fa-home"></i>
+                  <span class="nav-link-text">Homepagina</span>
+                  </a>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                  <a class="nav-link" href="basisadministratie">
+                  <i class="fa fa-fw fa-area-chart"></i>
+                  <span class="nav-link-text">Basisadministratie</span>
+                  </a>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                  <a class="nav-link" href="voertuigregistratie">
+                  <i class="fa fa-fw fa-area-chart"></i>
+                  <span class="nav-link-text">Voertuigregistratie</span>
+                  </a>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                  <a class="nav-link" href="training">
+                  <i class="fa fa-fw fa-book"></i>
+                  <span class="nav-link-text">Training</span>
+                  </a>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                  <a class="nav-link" href="aangiftes">
+                  <i class="fa fa-fw fa-area-chart"></i>
+                  <span class="nav-link-text">Aangifteadministratie</span>
+                  </a>
+               </li>
+
+               <!-- Admin Section-->
+               <?php if ($_SESSION['role'] == "admin") { ?>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                  <a class="nav-link" href="gebruikers">
+                  <i class="fa fa-user-circle"></i>
+                  <span class="nav-link-text"> Gebruikersadministratie</span>
+                  </a>
+               </li>
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                  <a class="nav-link" href="jaillog">
+                  <i class="fa fa-history"></i>
+                  <span class="nav-link-text">Logboeken</span>
+                  </a>
+               </li>
+               <?php } ?>
+
+              <!-- Default user section-->
+               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                  <a class="nav-link" href="exit.php">
+                  <i class="fa fa-sign-out"></i>
+                  <span class="nav-link-text">Uitloggen</span>
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
