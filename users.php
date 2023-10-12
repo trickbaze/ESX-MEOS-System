@@ -240,7 +240,7 @@ $newpass = rand(11111111,99999999);
 
               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="#">
+                  <a class="nav-link" href="index">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
