@@ -23,6 +23,31 @@ Installeer MEOS met git clone
   cd ESX-MEOS-System
 ```
     
+Upload de database naar je mysql server.
+```bash
+  Database/meos-database.sql
+```
+
+Pas in de config.php de database credentials aan. 
+```bash
+  // Meos database
+  db_host = "localhost";
+  $db_user = "root";
+  $db_pass = "";
+  $db_data = "meos";
+
+  $con = new mysqli($db_host,$db_user,$db_pass,$db_data);
+
+  // Fivem ESX database
+  $dd = array(
+  "host" => "localhost",
+  "user" => "root",
+  "pass" => "",
+  "data" => "esxlegacy_22eb04"
+);
+
+  $ddcon = new mysqli($dd['host'],$dd['user'],$dd['pass'],$dd['data']);
+```
 ## Features
 
 - Persoon administratie
