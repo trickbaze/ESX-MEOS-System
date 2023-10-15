@@ -57,9 +57,9 @@ Pas in de config.php de database credentials aan.
 - Trainings centrum
 
 ## Admin login
-Username: admin
+**Username:** admin
 
-Password: Welkom01!
+**Password:** Welkom01!
 
 Wij adviseren om gelijk een nieuwe admin account te maken en deze gebruiker te verwijderen.
 
