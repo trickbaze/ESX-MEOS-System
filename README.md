@@ -56,6 +56,12 @@ Pas in de config.php de database credentials aan.
 - Aangifte administratie
 - Trainings centrum
 
+## Admin login
+Username: admin
+Password: Welkom01!
+
+Wij adviseren om gelijk een nieuwe admin account te maken en deze gebruiker te verwijderen.
+
 
 ## Screenshots
 
