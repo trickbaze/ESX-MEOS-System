@@ -1,7 +1,7 @@
 <?php
 require "../config.php";
 
-//Checkk if app_identifier is valid and not blocked
+//Check if app_identifier is valid and not blocked
 if (isset($_GET['app_identifier']) AND trim($_GET['app_identifier']) != NULL) {
 	$check = $con->query("SELECT * FROM app_activations WHERE app_identifier = '".$con->real_escape_string($_GET['app_identifier'])."' AND status='banned'");
 	if ($check->num_rows > 0) {
