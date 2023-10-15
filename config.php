@@ -1,5 +1,5 @@
-
 <?php
+//Version 1.2.4
 ini_set("session.hash_function","sha512");
 session_start();
 
