@@ -186,6 +186,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	}
 }
 
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+	if ($_POST['form'] == "add") {
+
+		$con->query("INSERT INTO specialisatie_aanmeldingen 
+		(
+		id,
+		specialisatie,
+		user
+		) VALUES 
+		(
+		'',
+		'".$con->real_escape_string($_POST['user'])."',
+		'".$con->real_escape_string($_POST['specialisatie'])."'
+		)");
+		Header("Location:training");
+	}
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -239,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="voertuigregistratie">
+                  <a class="nav-link" href="rdw">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
@@ -292,9 +311,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </li>
         <li class="breadcrumb-item active">Training</li>
       </ol>
-		<?php if (@$_SESSION['trainer'] == true) { ?>
-		<button onclick="$('#createModal').modal();" class="btn btn-success">Creëer specialisatie</button>
-		<?php } ?>
 		<?php if (@$_SESSION['trainer'] == true) { ?>
 		<h1>Kandidaten en aanmeldingen:</h1>
 		<form id="getSpecialisatieForm" method="get">
@@ -368,16 +384,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		  </tr>
 		  <?php } ?>
 		</table>
+		<?php if (@$_SESSION['trainer'] == true) { ?>
+		<button onclick="$('#addModal').modal();" class="btn btn-primary">Kandidaat toevoegen</button>
+		<?php } ?>
+		<?php if (@$_SESSION['trainer'] == true) { ?>
+		<button onclick="$('#createModal').modal();" class="btn btn-success">Creëer specialisatie</button>
+		<?php } ?>
 	  </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Zoutelande</small>
-        </div>
-      </div>
-    </footer>
+	<footer class="sticky-footer">
+            <div class="container">
+               <div class="text-center">
+                  <small><?php echo $site_footer; ?></small>
+               </div>
+            </div>
+         </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
@@ -428,6 +450,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 					<option value="Hoofd Commissaris">Hoofd Commissaris</option>
 					<option value="1e Hoofd Commissaris">1e Hoofd Commissaris</option>
 				</select>
+				<input type="submit" class="btn btn-primary" value="Bewaren">
+			</form>
+		  </div>
+        </div>
+      </div>
+    </div>
+	<!-- END Create Modal-->
+
+	<!-- BEGIN Add Modal-->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Gebruiker toevoegen</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+			<form method="POST">
+				<input type="hidden" name="form" value="add">
+				<em><b>ID:</b></em><br>
+				<small>ID kan je vinden in de Gebruikersadministratie</small>
+				<input class="form-control" type="text" name="specialisatie" required>
+				<em><b>Specialisatie:</b></em><br>
+				<small>De value altijd 0</small>
+				<input class="form-control" type="text" placeholder="0" name="user" required>
+				<br>
 				<input type="submit" class="btn btn-primary" value="Bewaren">
 			</form>
 		  </div>

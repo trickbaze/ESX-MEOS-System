@@ -92,7 +92,7 @@ if (@$_GET['actie'] == "goedkeuren") {
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="voertuigregistratie">
+                  <a class="nav-link" href="rdw">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
@@ -166,7 +166,8 @@ if (@$_GET['no'] == "no") {
 		?>
 		<hr>
 		<form method="GET">
-			Eigenaar:<br><input class="form-control" type="text" value="<?php echo $r['firstname']." ".$r['lastname']; ?>" readonly><br>
+			Voornaam:<br><input class="form-control" type="text" value="<?php echo $r['firstname'];?>" readonly><br>
+			Achternaam:<br><input class="form-control" type="text" value="<?php echo $r['lastname'];?>" readonly><br>
 			Kenteken:<br><input class="form-control" type="text" value="<?php echo $_GET['kenteken']; ?>" readonly><br>
 			Status:<br><input class="form-control" type="text" value="<?php echo $status; ?>" readonly><br>
 			Afkeurreden:<br><textarea class="form-control" readonly><?php echo @htmlspecialchars($wokInformation['reason']); ?></textarea><br>
@@ -192,12 +193,12 @@ if (@$_GET['no'] == "no") {
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Meerstad</small>
-        </div>
-      </div>
-    </footer>
+            <div class="container">
+               <div class="text-center">
+                  <small><?php echo $site_footer; ?></small>
+               </div>
+            </div>
+         </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>

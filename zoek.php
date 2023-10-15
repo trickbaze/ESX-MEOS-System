@@ -69,7 +69,7 @@ $mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth FR
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="voertuigregistratie">
+                  <a class="nav-link" href="rdw">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
@@ -127,7 +127,7 @@ $mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth FR
 		<input type="text" name="q" class="form-control" placeholder="Voornaam -OF- Achternaam"><br>
 		<input type="submit" value="Zoeken" class="btn btn-success btn-block">
 		</form>
-		<hr>
+		<br>
 		<table id="badm" class="table">
 		  <tr>
 			<th>Actie</th>
@@ -153,12 +153,12 @@ $mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth FR
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Meerstad</small>
-        </div>
-      </div>
-    </footer>
+            <div class="container">
+               <div class="text-center">
+                  <small><?php echo $site_footer; ?></small>
+               </div>
+            </div>
+         </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>

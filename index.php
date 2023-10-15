@@ -75,7 +75,7 @@
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="voertuigregistratie">
+                  <a class="nav-link" href="rdw">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
@@ -141,7 +141,7 @@
          </div>
          <?php } ?>
          <div class="col-xl-3 col-sm-6 mb-3">
-            <a href="voertuigregistratie" class="fill-div">
+            <a href="rdw" class="fill-div">
                <div class="bg-primary knop">
                   <img id="icon-meos" src="img/sports-car.svg">
                   <p class="text-button">Vervoersmiddel</p>
@@ -170,8 +170,29 @@
          </div>
       </div>
       <h1>
-         Welkom <?php echo $_SESSION['name']; ?><br>
-         In het MEOS systeem van Server
+      <?php 
+ 
+         $tijd = date("G"); //bepaal de tijd in uren 
+         
+         if($tijd < 6) 
+            { 
+                  echo "Goedenacht,"; 
+            } 
+         elseif($tijd < 12) 
+            { 
+                  echo "Goedemorgen,"; 
+            } 
+         elseif($tijd < 18)   
+            { 
+                  echo "Goedemiddag,"; 
+            } 
+         else 
+            { 
+                  echo "Goedeavond,";   
+            } 
+         ?> 
+         <?php echo $_SESSION['name']; ?><br>
+         In het MEOS systeem van <?php echo $site_name; ?>
       </h1>
       <b><u>Dit systeem is uitsluitend voor geautoriseerd gebruik. Misbruik van dit systeem kan leiden tot ontslag en/of strafvervolging</u></b><br>
       <?php
@@ -199,7 +220,7 @@
       <br>
       <div class="list-group">
          <?php
-            if ($_SESSION['role'] != "anwb") {
+            if ($_SESSION['role'] == "admin") {
               $sel = $con->query("SELECT DISTINCT burgerid,agent,burger FROM livelog ORDER BY id DESC LIMIT 6");
               while ($row = $sel->fetch_assoc()) {
             	  if (trim($row['agent']) != "") {
@@ -208,22 +229,23 @@
             <h4 class="list-group-item-heading"><?php echo $row['burger'] ?></h4>
             <p class="list-group-item-text"><?php echo $row['agent'] ?> heeft <?php echo $row['burger']; ?> opgezocht.</p>
          </a>
+         <?php ?>
          <?php
             }
             }
             } else {
             echo "Geen toegang tot logboek";
             }
-            ?>
-         <hr>
-         <h1>Signalementen</h1>
+         ?>
+<!--          <hr>
+          <h1>Signalementen</h1>
          <br>
          <div class="list-group">
             <?php
                if ($_SESSION['role'] != "anwb") {
                  $sel = $con->query("SELECT notitie, gameid FROM informatie WHERE gesignaleerd = true ORDER BY id");
                  while ($row = $sel->fetch_assoc()) {
-               	  $user = $ddcon->query("SELECT CONCAT(firstname, ' ', lastname) as name FROM users WHERE aid = '".$row['gameid']."'");
+               	  $user = $ddcon->query("SELECT CONCAT(firstname, ' ', lastname) as name FROM users WHERE identifier = '".$row['gameid']."'");
                
                 ?>
             <a href="gegevens.php?id=<?php echo $row['gameid'] ?>" class="list-group-item">
@@ -236,14 +258,15 @@
                echo "Geen toegang tot logboek";
                }
                ?>
-         </div>
+         </div> -->
          <footer class="sticky-footer">
             <div class="container">
                <div class="text-center">
-                  <small>Copyright © NAME</small>
+                  <small><?php echo $site_footer; ?></small>
                </div>
             </div>
          </footer>
+         
          <!-- Scroll to Top Button-->
          <a class="scroll-to-top rounded" href="#page-top">
          <i class="fa fa-angle-up"></i>

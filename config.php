@@ -8,6 +8,7 @@ ini_set("max_execution_time",500);
 error_reporting(0);
 
 
+// Meos database
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
@@ -15,6 +16,7 @@ $db_data = "meos";
 
 $con = new mysqli($db_host,$db_user,$db_pass,$db_data);
 
+// Fivem ESX database
 $dd = array(
 "host" => "localhost",
 "user" => "root",
@@ -24,18 +26,14 @@ $dd = array(
 
 $ddcon = new mysqli($dd['host'],$dd['user'],$dd['pass'],$dd['data']);
 
-$ddg = array(
-"host" => "",
-"user" => "",
-"pass" => "",
-"data" => ""
-);
 
-
-$site_title = "Server | MEOS Systeem";
+// Site name, title, footer and browser color
+$site_name = "Los Santos";
+$site_title = "Los Santos | MEOS Systeem";
+$site_footer = "Copyright © Los Santos";
 $browser_color = "#004682";
 
-# Don't toch this
+# Never touch this
 require "GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator();
 
@@ -45,6 +43,8 @@ if (isset($_SESSION['id'])) {
 		Header("Location: exit.php");
 	}
 }
+
+# Never touch this
 
 if (isset($_POST)) {
 	$a = $_POST;
@@ -61,6 +61,7 @@ if (isset($_POST)) {
 	}
 }
 
+# Never touch this
 //Log
 $data = 
 array(
@@ -87,7 +88,7 @@ VALUES
 )");
 $curl = curl_init();
 
-curl_setopt($curl,CURLOPT_URL,"https://meos.zoutelanderp.nl/indexveh.php");
+curl_setopt($curl,CURLOPT_URL,"indexveh.php");
 curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
 curl_setopt($curl,CURLOPT_HEADER, false); 
 curl_setopt($curl,CURLOPT_HEADER, false); 

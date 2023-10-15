@@ -17,7 +17,6 @@ RewriteRule ^aangifteafschrift$ aangifteafschrift.php
 RewriteRule ^jaillog$ jaillog.php
 RewriteRule ^boete$ boete.php
 RewriteRule ^vrijeboete$ vrijeboete.php
-RewriteRule ^huiszoekingafschrift$ huiszoekingafschrift.php
 RewriteRule ^rdw$ rdw.php
 RewriteRule ^beveiligingscentrum$ beveiligingscentrum.php
 RewriteRule ^training$ training.php
@@ -25,5 +24,3 @@ RewriteRule ^indexveh$ indexveh.php
 RewriteRule ^cjib$ cjib.php
 RewriteRule ^cjib_dossier$ cjib_dossier.php
 RewriteRule ^cjib_herinnering$ cjib_herinnering.php
-RewriteRule ^i8$ i8.php
-RewriteRule ^geti8$ geti8.php

@@ -252,7 +252,7 @@ $newpass = rand(11111111,99999999);
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="voertuigregistratie">
+                  <a class="nav-link" href="rdw">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
@@ -318,13 +318,10 @@ $newpass = rand(11111111,99999999);
 		<b><em>Rol:</em></b><br>
 		<select name="rol" class="form-control">
 		<option value="user">Gebruiker</option>
-		<option value="om">Openbaar Ministerie</option>
-		<option value="anwb">ANWB</option>
 		<option value="admin">Beheerder</option>
 		</select><br>
 		<b><em>Rang:</em></b><br>
 		<select name="rang" class="form-control">
-		<option value="G4S">G4S</option>
 		<option value="Aspirant" selected>Aspirant</option>
 		<option value="Surveillant">Surveillant</option>
 		<option value="Agent">Agent</option>
@@ -380,13 +377,13 @@ $newpass = rand(11111111,99999999);
 	  </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Meerstad</small>
-        </div>
-      </div>
-    </footer>
+	<footer class="sticky-footer">
+            <div class="container">
+               <div class="text-center">
+                  <small><?php echo $site_footer; ?></small>
+               </div>
+            </div>
+         </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
