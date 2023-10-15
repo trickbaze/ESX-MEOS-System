@@ -3,6 +3,8 @@
 
 Politie MEOS Systeem uitsluitend voor FiveM servers met het ESX Framework
 
+# Installatie type
+Momenteel werkt MEOS niet op een Apache of NGINX die draait op Ubuntu of een andere OS, het werkt momenteel alleen nog met XAMPP, cPanel Plesk, DirectAdmin, ISPConfig en Virtualmin.
 
 
 ## Server Requirements
