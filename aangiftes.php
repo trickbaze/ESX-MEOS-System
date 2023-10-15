@@ -84,7 +84,7 @@ $mensenq = $con->query("SELECT id, opnamedatum, concat(aangever_voornaam, ' ' ,a
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="voertuigregistratie">
+                  <a class="nav-link" href="rdw">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
@@ -174,12 +174,12 @@ $mensenq = $con->query("SELECT id, opnamedatum, concat(aangever_voornaam, ' ' ,a
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Zoutelande</small>
-        </div>
-      </div>
-    </footer>
+            <div class="container">
+               <div class="text-center">
+                  <small><?php echo $site_footer; ?></small>
+               </div>
+            </div>
+         </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>

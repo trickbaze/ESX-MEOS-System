@@ -65,7 +65,7 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="voertuigregistratie">
+                  <a class="nav-link" href="rdw">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
@@ -288,12 +288,12 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Meerstad</small>
-        </div>
-      </div>
-    </footer>
+            <div class="container">
+               <div class="text-center">
+                  <small><?php echo $site_footer; ?></small>
+               </div>
+            </div>
+         </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>

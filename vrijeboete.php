@@ -37,7 +37,7 @@ if ($_SESSION['rang'] == "G4S") {
 	Header("Location: index");
 }
 
-$mensenq = $ddcon->query("SELECT identifier, concat(firstname,' ',lastname) as name FROM users WHERE aid='".$ddcon->real_escape_string($_GET['persoon'])."' ORDER BY lastname DESC");
+$mensenq = $ddcon->query("SELECT identifier, concat(firstname,' ',lastname) as name FROM users WHERE identifier='".$ddcon->real_escape_string($_GET['persoon'])."' ORDER BY lastname DESC");
 $row = $mensenq->fetch_assoc();
 
 $steamid = $row['identifier'];
@@ -95,7 +95,7 @@ $steamid = $row['identifier'];
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="voertuigregistratie">
+                  <a class="nav-link" href="rdw">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
@@ -162,7 +162,7 @@ $steamid = $row['identifier'];
 		<hr>
 		<input type="submit" value="Afronden" class="btn btn-block btn-success"><br>
 		<?php if ($_SESSION['role'] == "admin") { ?>
-		<a class="btn btn-block btn-primary" href="/boete?persoon=<?php echo $_GET['persoon']; ?>">Regulier Proces-Verbaal o.b.v. feitcode</a>
+		<a class="btn btn-block btn-primary" href="./boete?persoon=<?php echo $_GET['persoon']; ?>">Regulier Proces-Verbaal o.b.v. feitcode</a>
 		<?php } ?>
 		</form>
 		
@@ -171,12 +171,12 @@ $steamid = $row['identifier'];
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Meerstad</small>
-        </div>
-      </div>
-    </footer>
+            <div class="container">
+               <div class="text-center">
+                  <small><?php echo $site_footer; ?></small>
+               </div>
+            </div>
+         </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>

@@ -127,7 +127,7 @@ $actions = $con->query("SELECT burger,burgerid,datetime FROM livelog WHERE agent
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="voertuigregistratie">
+                  <a class="nav-link" href="rdw">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
@@ -194,6 +194,7 @@ $actions = $con->query("SELECT burger,burgerid,datetime FROM livelog WHERE agent
 			<input type="password" class="form-control" name="password1">
 			<em>Herhaal nieuw wachtwoord:</em>
 			<input type="password" class="form-control" name="password2">
+			<br>
 			<input type="submit" value="Wachtwoord wijzigen" class="btn btn-primary">
 		</form>
 		<hr>
@@ -213,6 +214,7 @@ $actions = $con->query("SELECT burger,burgerid,datetime FROM livelog WHERE agent
 			<input type="text" name="code" pattern="[^' ']+" placeholder="252987" class="form-control">
 			<input type="hidden" name="secret" value="<?php echo $secret; ?>">
 			<input type="hidden" name="form" value="2fa">
+			<br>
 			<input type="submit" value="2FA Inschakelen" class="btn btn-primary">
 		</form>
 		<?php
@@ -248,20 +250,20 @@ $actions = $con->query("SELECT burger,burgerid,datetime FROM livelog WHERE agent
 			while($row = $actions->fetch_assoc()) {
 			?>
 			<tr>
-			  <td><a href="https://meos.meos-systeem.nl/gegevens?id=<?php echo $row['burgerid']; ?>"><?php echo $row['burger']; ?></a></td>
+			  <td><a href="gegevens?id=<?php echo $row['burgerid']; ?>"><?php echo $row['burger']; ?></a></td>
 			  <td><?php echo $row['datetime']; ?></td>
 			</tr>
 			<?php } ?>
 		  </tbody>
 		</table>
 		<?php } ?>
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Meerstad</small>
-        </div>
-      </div>
-    </footer>
+		<footer class="sticky-footer">
+            <div class="container">
+               <div class="text-center">
+                  <small><?php echo $site_footer; ?></small>
+               </div>
+            </div>
+         </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
