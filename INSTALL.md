@@ -4,8 +4,8 @@
 Install LAMP-SERVER Ubuntu 20.04
 
 ```
-  sudo apt update && sudo apt upgrade -y
-  sudo apt-get install lamp-server^
+sudo apt update && sudo apt upgrade -y
+sudo apt-get install lamp-server^
 ```
 ---
 
@@ -16,7 +16,7 @@ Install LAMP-SERVER Ubuntu 20.04
 Depending on your operating system and Apache version, this might differ. On Ubuntu, for example, you can use the following command:
 
 ```
-  sudo a2enmod rewrite
+sudo a2enmod rewrite
 ```
 
 ### Update Apache Configuration
@@ -26,28 +26,28 @@ Next, you’ll need to allow the use of .htaccess files to control URL rewriting
 Open the file for your site:
 
 ```
-  sudo nano /etc/apache2/sites-available/000-default.conf
+sudo nano /etc/apache2/sites-available/000-default.conf
 ```
 
 Find the <Directory /var/www/html> block and change the AllowOverride directive from None to All. If the line doesn’t exist, you can add it:
 
 ```
-  <Directory /var/www/html>
-    AllowOverride All
-  </Directory>
+<Directory /var/www/html>
+  AllowOverride All
+</Directory>
 ```
 This change allows .htaccess files in the /var/www/html directory (or the appropriate directory for your site) to include mod_rewrite rules.
 
 ### Restart Apache
 ```
-  sudo systemctl restart apache2
+sudo systemctl restart apache2
 ```
 
 # Install phpMyAdmin
 
 ### Install phpMyAdmin
 ```
-  sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
 ```
 - For the server selection, choose `apache2`
 - Selecht `Yes` when asked whether to use `dbconfig-common` to set up the database
