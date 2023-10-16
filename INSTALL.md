@@ -5,7 +5,7 @@ Install LAMP-SERVER Ubuntu 20.04
 
 ```
 sudo apt update && sudo apt upgrade -y
-sudo apt-get install lamp-server^
+sudo apt-get install lamp-server^ -y
 ```
 ---
 
