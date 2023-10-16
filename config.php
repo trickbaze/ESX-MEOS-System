@@ -21,7 +21,7 @@ $dd = array(
 "host" => "localhost",
 "user" => "root",
 "pass" => "",
-"data" => "esxlegacy_22eb04"
+"data" => "esxlegacy_2c2bf7"
 );
 
 $ddcon = new mysqli($dd['host'],$dd['user'],$dd['pass'],$dd['data']);
