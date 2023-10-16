@@ -9,7 +9,7 @@ Momenteel werkt MEOS niet op een Apache of NGINX die draait op Ubuntu of een and
 
 ## Server Requirements
 
-**PHP** 7.4 or higher 
+**PHP** 7.4 or 8.0
 
 **Apache** 2.4 or higher
 
