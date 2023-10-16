@@ -48,7 +48,7 @@ if (isset($_GET['registeer'])) {
 	$data = array("username" => "Trainingen en specialisaties", "content" => $message);
 	$data_string = json_encode($data);
 
-	$ch = curl_init('https://discordapp.com/api/webhooks/672866292012941334/RDxQWj3A7szUv6aUey6NJsIqrNRSLvd5msZZgS_MRxKd0Sd3tRJ5mlN5PFIIVMzrYGjG');
+	$ch = curl_init('https://discord.com/api/webhooks/1163125177824071690/mr3IMls8_ot5b5NTJ8TfNFnJTZFI98cXBV9-Oq2wnL4L4zzeOcynj45yy1f9ai1IqJ_e');
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -84,7 +84,7 @@ if (isset($_GET['action'])) {
 		$data = array("username" => "Trainingen en specialisaties", "content" => $message);
 		$data_string = json_encode($data);
 
-		$ch = curl_init('https://discordapp.com/api/webhooks/652500330491150357/mPm5TIvlz_SHpUw9IbLHYtxG3Bnj6OJyKNah3Jm9DubwMuXZP0QFsUtPmzNq5BkKVf1X');
+		$ch = curl_init('https://discord.com/api/webhooks/1163125239434182857/ex59YZfD7qNVABPfmwKPaPKPDvIO8JersQU0lL0PToiNmNO0rmHeQuucxxBkFg3Kpq1G');
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -138,7 +138,7 @@ if (isset($_GET['action'])) {
 		$data = array("username" => "Trainingen en specialisaties", "content" => $message);
 		$data_string = json_encode($data);
 
-		$ch = curl_init('https://discordapp.com/api/webhooks/652500330491150357/mPm5TIvlz_SHpUw9IbLHYtxG3Bnj6OJyKNah3Jm9DubwMuXZP0QFsUtPmzNq5BkKVf1X');
+		$ch = curl_init('https://discord.com/api/webhooks/1163125239434182857/ex59YZfD7qNVABPfmwKPaPKPDvIO8JersQU0lL0PToiNmNO0rmHeQuucxxBkFg3Kpq1G');
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -384,10 +384,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		  </tr>
 		  <?php } ?>
 		</table>
-		<?php if (@$_SESSION['trainer'] == true) { ?>
+		<?php if (@$_SESSION['admin'] == true) { ?>
 		<button onclick="$('#addModal').modal();" class="btn btn-primary">Kandidaat toevoegen</button>
 		<?php } ?>
-		<?php if (@$_SESSION['trainer'] == true) { ?>
+		<?php if (@$_SESSION['admin'] == true) { ?>
 		<button onclick="$('#createModal').modal();" class="btn btn-success">Creëer specialisatie</button>
 		<?php } ?>
 	  </div>
