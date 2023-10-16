@@ -1,5 +1,5 @@
 
-# Install Lamp-Server
+# Installation on Ubuntu / Debian
 
 Install LAMP-SERVER Ubuntu 20.04
 
