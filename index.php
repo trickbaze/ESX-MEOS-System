@@ -6,13 +6,9 @@
    }
    $inw = $ddcon->query("SELECT * FROM users");
    $hvs = $ddcon->query("SELECT * FROM users WHERE job = 'police' OR job = 'ambulance'");
-   $gev = $ddcon->query("SELECT * FROM jail");
    $voe = $ddcon->query("SELECT * FROM owned_vehicles");
-   $moncon = $ddcon->query("SELECT sum(money) as tot FROM users");
    $openb = $ddcon->query("SELECT sum(amount) as tot FROM billing WHERE target='society_police'");
-   
-   $logc = $con->query("SELECT * FROM livelog");
-   
+      
    if ($_SERVER['REQUEST_METHOD'] == "POST") {
    	if (isset($_POST['anotitie']) AND trim($_POST['anotitie']) != "") {
    		$con->query("INSERT INTO anotitie (user_id,text) VALUES ('".$con->real_escape_string($_SESSION['id'])."','".$con->real_escape_string($_POST['anotitie'])."')");
@@ -216,7 +212,7 @@
          }
          ?>
       <?php } ?>
-      <h1>Logboek</h1>
+<!--       <h1>Logboek</h1>
       <br>
       <div class="list-group">
          <?php
@@ -236,7 +232,7 @@
             } else {
             echo "Geen toegang tot logboek";
             }
-         ?>
+         ?> -->
 <!--          <hr>
           <h1>Signalementen</h1>
          <br>
