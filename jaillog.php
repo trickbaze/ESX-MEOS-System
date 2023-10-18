@@ -53,31 +53,31 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
 
               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
@@ -86,13 +86,13 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="gebruikers.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
@@ -114,7 +114,7 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Gevangenislogboek</li>
       </ol>
@@ -144,7 +144,7 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Invorderlogboek</li>
       </ol>
@@ -176,7 +176,7 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Huiszoekinglogboek</li>
       </ol>
@@ -214,7 +214,7 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Informatielogboek</li>
       </ol>
@@ -234,7 +234,7 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
 			</td>
 			<td><?php echo htmlspecialchars($row['agent']); ?></td>
 			<td><?php echo $row['datetime']; ?></td> 
-			<td><a href="/gegevens?id=<?php echo $row['burgerid']; ?>">Bezoek burger</a></td> 
+			<td><a href="/gegevens.php?id=<?php echo $row['burgerid']; ?>">Bezoek burger</a></td> 
 		  </tr>
 		  <?php 
 		  }
@@ -279,7 +279,7 @@ $zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog W
 			<td><?php echo htmlspecialchars($row['kenteken']); ?></td>
 			<td><?php echo $row['datetime']; ?></td> 
 		  </tr>
-		  <?php 
+<?php 
 		  }
 		  ?>
 		</table>

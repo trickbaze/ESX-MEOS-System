@@ -5,7 +5,7 @@ if ($_SESSION['loggedin'] != TRUE) {
 }
 
 if ($_SESSION['rang'] == "G4S") {
-	Header("Location: index");
+	Header("Location: index.php");
 }
 
 if (isset($_GET['kenteken'])) {
@@ -27,12 +27,12 @@ if (isset($_GET['kenteken'])) {
 if (@$_GET['actie'] == "afkeuren") {
 	$i = $con->query("INSERT INTO rdwwok (voertuigid,reason) VALUES ('".$_GET['id']."','".$_GET['reason']."')");
 	$log = $con->query("INSERT INTO rdwlog (user,voertuigid,action,ip,reason,plate) VALUES ('".$_SESSION['id']."','".$_GET['id']."','afkeuren','".$_SERVER['REMOTE_ADDR']."', '".$_GET['reason']."', '".$_GET['kenteken']."')");
-	Header("Location:rdw?kenteken=".$_GET['kenteken']);
+	Header("Location:rdw.php?kenteken=".$_GET['kenteken']);
 }
 if (@$_GET['actie'] == "goedkeuren") {
 	$i = $con->query("DELETE FROM rdwwok WHERE voertuigid = '".$_GET['id']."'");
 	$log = $con->query("INSERT INTO rdwlog (user,voertuigid,action,ip,reason,plate) VALUES ('".$_SESSION['id']."','".$_GET['id']."','goedkeuren','".$_SERVER['REMOTE_ADDR']."','".$_GET['reason']."', '".$_GET['kenteken']."')");
-	Header("Location:rdw?kenteken=".$_GET['kenteken']);
+	Header("Location:rdw.php?kenteken=".$_GET['kenteken']);
 }
 ?>
 <!DOCTYPE html>

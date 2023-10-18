@@ -5,12 +5,12 @@ if ($_SESSION['loggedin'] != TRUE) {
 }
 
 if ($_SESSION['rang'] == "G4S") {
-	Header("Location: index");
+	Header("Location: index.php");
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	if (trim($_POST['q']) != NULL) {		
-		Header("Location: zoek?q=".$_POST['q']);
+		Header("Location: zoek.php?q=".$_POST['q']);
 	}
 }
 
@@ -57,31 +57,31 @@ $mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth FR
 
               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
@@ -90,13 +90,13 @@ $mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth FR
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="gebruikers.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
@@ -118,7 +118,7 @@ $mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth FR
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Basisadministratie</li>
       </ol>
@@ -139,7 +139,7 @@ $mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth FR
 		  while ($row = $mensenq->fetch_assoc()) {  
 		  ?>
 		  <tr>
-			<td><a href="gegevens?id=<?php echo $row['identifier']; ?>">Muteren</a></td>
+			<td><a href="gegevens.php?id=<?php echo $row['identifier']; ?>">Muteren</a></td>
 			<td><?php echo htmlspecialchars($row['lastname']); ?></td> 
 			<td><?php echo htmlspecialchars($row['firstname']); ?></td>
 			<td><?php echo htmlspecialchars($row['dateofbirth']); ?></td>

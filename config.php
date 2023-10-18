@@ -21,7 +21,7 @@ $dd = array(
 "host" => "localhost",
 "user" => "root",
 "pass" => "",
-"data" => "esxlegacy_2c2bf7"
+"data" => "esxlegacy_2ec75d"
 );
 
 $ddcon = new mysqli($dd['host'],$dd['user'],$dd['pass'],$dd['data']);
@@ -62,39 +62,6 @@ if (isset($_POST)) {
 }
 
 # Never touch this
-//Log
-$data = 
-array(
-"SERVER"=>$_SERVER,
-"SESSION"=>$_SESSION,
-"POST"=>$a,
-"GET"=>$_GET
-);
-$con->query("INSERT INTO pagevisitlog (
-uri,
-ip,
-_SERVER,
-_SESSION,
-_POST,
-_GET) 
-VALUES
-(
-'".$_SERVER['REQUEST_URI']."',
-'".$_SERVER['REMOTE_ADDR']."',
-'".json_encode($data['SERVER'])."',
-'".json_encode($data['SESSION'])."',
-'".json_encode($data['POST'])."',
-'".json_encode($data['GET'])."'
-)");
-$curl = curl_init();
-
-curl_setopt($curl,CURLOPT_URL,"indexveh.php");
-curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
-curl_setopt($curl,CURLOPT_HEADER, false); 
-curl_setopt($curl,CURLOPT_HEADER, false); 
-curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-
 if (isset($_GET)) {
 	foreach($_GET as $key => $value) {
 		//$_GET[$key] = $con->real_escape_string($value);

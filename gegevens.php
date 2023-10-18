@@ -4,36 +4,36 @@
    if ($_SESSION['loggedin'] != TRUE) {
    	Header("Location: login.php?returnpage=basisadministratie");
    }
-   
+
    if ($_SESSION['rang'] == "G4S") {
-   	Header("Location: index");
+   	Header("Location: index.php");
    }
    if ($_SESSION['role'] == "anwb") {
-   	Header("Location: index");
+   	Header("Location: index.php");
    }
-   
+
    if (@$_GET['action'] == "delete") {
    	$delete = $con->query("DELETE FROM informatie WHERE id='".$con->real_escape_string($_GET['verbaal'])."'");
-   	Header("Location: gegevens?id=".$_GET['persoon']);
+   	Header("Location: gegevens.php?id=".$_GET['persoon']);
    }
-   
+
    if (@$_GET['action'] == "delfine") {
    	if ($_GET['id'] == "all") {
    		$ddcon->query("DELETE FROM billing WHERE identifier='".$ddcon->real_escape_string($_GET['steam'])."'");
    	} else {
    		$ddcon->query("DELETE FROM billing WHERE id='".$ddcon->real_escape_string($_GET['id'])."'");
    	}
-   	Header("Location: gegevens?id=".$_GET['persoon']);
+   	Header("Location: gegevens.php?id=".$_GET['persoon']);
    }
-   
+
    if (@$_GET['action'] == "beslag") {
    	//exit;
    	$ddcon->query("DELETE FROM owned_vehicles WHERE id='".$ddcon->real_escape_string($_GET['id'])."'");
    	$con->query("INSERT INTO beslaglog (ip,agent,burger,kenteken,voertuig) VALUES ('".$_SERVER['REMOTE_ADDR']."','".$con->real_escape_string($_SESSION['name'])."','".$con->real_escape_string($_GET['user'])."','".$con->real_escape_string($_GET['kenteken'])."','".$con->real_escape_string($_GET['voertuig'])."')");
-   	Header("Location: gegevens?id=".$_GET['persoon']);
-   
+   	Header("Location: gegevens.php?id=".$_GET['persoon']);
+
    }
-   
+
    if (@$_GET['action'] == "invorderen") {
    	//echo $_GET['owner'];
    	//echo "<br>";
@@ -44,14 +44,14 @@
    	$ddcon->query("DELETE FROM user_licenses WHERE owner='".$ddcon->real_escape_string($_GET['owner'])."' AND type='drive'"); //B
    	$ddcon->query("DELETE FROM user_licenses WHERE owner='".$ddcon->real_escape_string($_GET['owner'])."' AND type='bus'"); //Bus
    	$con->query("INSERT INTO invorderlog (agent,burger,ip) VALUES ('".$_SESSION['username']."(".$_SESSION['name'].")','".$con->real_escape_string($_GET['owner'])."','".$_SERVER['REMOTE_ADDR']."')");
-   	Header("Location: gegevens?id=".$_GET['persoon']);
+   	Header("Location: gegevens.php?id=".$_GET['persoon']);
    }
-   
+
    if (@$_GET['action'] == "designal") {
    	$con->query("UPDATE informatie SET gesignaleerd = null WHERE gameid = '".$_GET['gameid']."'");
-   	Header("Location: gegevens?id=".$_GET['gameid']);
+   	Header("Location: gegevens.php?id=".$_GET['gameid']);
    }
-   
+
    if ($_SERVER['REQUEST_METHOD'] == "POST") {
    	if ($_POST['form'] == "notitie") {
    		if (isset($_POST['gesignaleerd'])) {
@@ -79,14 +79,14 @@
    		'".$con->real_escape_string($gesignaleerd)."'
    		)
    		");
-   		
+
    		if ($insert) {
-   			Header("Location:gegevens?id=".$_POST['gameid']."&status=ok");
+   			Header("Location:gegevens.php?id=".$_POST['gameid']."&status=ok");
    		} else {
-   			Header("Location:gegevens?id=".$_POST['gameid']."&status=kut");
+   			Header("Location:gegevens.php?id=".$_POST['gameid']."&status=kut");
    		}
    	}
-   	
+
    	if ($_POST['form'] == "recherche") {
    		$insert = $con->query("
    		INSERT INTO
@@ -104,15 +104,15 @@
    		'".$con->real_escape_string($_POST['gameid'])."'
    		)
    		");
-   		
+
    		if ($insert) {
-   			Header("Location:gegevens?id=".$_POST['gameid']."&status=ok2");
+   			Header("Location:gegevens.php?id=".$_POST['gameid']."&status=ok2");
    		} else {
-   			Header("Location:gegevens?id=".$_POST['gameid']."&status=kut2");
+   			Header("Location:gegevens.php?id=".$_POST['gameid']."&status=kut2");
    		}
    	}
-   	
-   	
+
+
    	if ($_POST['form'] == "jail") {
    		$insert = $ddcon->query("
    		INSERT INTO
@@ -126,14 +126,14 @@
    		'".$ddcon->real_escape_string($_POST['time'])."'
    		)
    		");
-   		
+
    		if ($insert) {
-   			Header("Location:gegevens?id=".$_POST['persoon']."&status=ok");
+   			Header("Location:gegevens.php?id=".$_POST['persoon']."&status=ok");
    		} else {
-   			Header("Location:gegevens?id=".$_POST['persoon']."&status=kut");
+   			Header("Location:gegevens.php?id=".$_POST['persoon']."&status=kut");
    		}
    	}
-   	
+
    	if ($_POST['form'] == "kladblok") {
    		//exit(var_dump($_POST));
    		$x = $con->query("SELECT * FROM kladblok WHERE userid = '".$_GET['id']."' LIMIT 1");
@@ -143,45 +143,45 @@
    			$con->query("INSERT INTO kladblok (userid,text) VALUES ('".$_GET['id']."','".$_POST['kladblok']."')");
    		}
    	}
-   
+
    	if (isset($_GET['kenteken'])) {
    		//$a = $ddcon->query("SELECT * FROM owned_vehicles INNER JOIN users ON users.identifier = owned_vehicles.owner WHERE vehicle LIKE '%".$_GET['kenteken']."%' LIMIT 1");
    		$a = $ddcon->query("SELECT * FROM owned_vehicles INNER JOIN users ON users.identifier = owned_vehicles.owner WHERE plate = '".$_GET['kenteken']."' LIMIT 1");
    		$r = $a->fetch_assoc();
-   		
+
    		$s = $con->query("SELECT id,reason FROM rdwwok WHERE voertuigid = '".$r['id']."'");
-   		
+
    		if ($s->num_rows !== 0) {
    			$status2 = "Afgekeurd";
    		} else {
    			$status2 = "Goedgekeurd";
    		}
-   		
+
    		$wokInformation = $s->fetch_assoc();
    	}
-   	
+
    }
-   
+
    $mensenq = $ddcon->query("SELECT identifier, firstname, lastname, dateofbirth, sex, height, jobs.label as job, users.identifier as identifier FROM users INNER JOIN job_grades ON (users.job = job_grades.job_name AND users.job_grade = job_grades.grade) INNER JOIN jobs ON users.job = jobs.name WHERE identifier= '".$ddcon->real_escape_string($_GET['id'])."' LIMIT 1");
    $row = $mensenq->fetch_assoc();
-   
+
    $steamid = $row['identifier'];
-   
+
    $notities = $con->query("SELECT * FROM informatie WHERE gameid = '".$con->real_escape_string($_GET['id'])."' ORDER BY id DESC");
    $voertuigen = $ddcon->query("SELECT owner, plate,vehicle, type FROM owned_vehicles WHERE owner = '".$row['identifier']."'");
-   
+
    $identifier = $row['identifier'];
    //var_dump($voertuigen);
    //exit;
-   
+
    $rijbewijs_theorie = $ddcon->query("SELECT * FROM user_licenses WHERE type='dmv' AND owner='".$row['identifier']."' LIMIT 1");
    $rijbewijs_a = $ddcon->query("SELECT * FROM user_licenses WHERE type='drive_bike' AND owner='".$row['identifier']."' LIMIT 1");
    $rijbewijs_b = $ddcon->query("SELECT * FROM user_licenses WHERE type='drive' AND owner='".$row['identifier']."' LIMIT 1");
    $rijbewijs_c = $ddcon->query("SELECT * FROM user_licenses WHERE type='drive_truck' AND owner='".$row['identifier']."' LIMIT 1");
    $rijbewijs_bus = $ddcon->query("SELECT * FROM user_licenses WHERE type='bus' AND owner='".$row['identifier']."' LIMIT 1");
-   
+
    $rijbewijzen = "";
-   
+
    if ($rijbewijs_theorie->num_rows == 1) {
    	$rijbewijzen .= "Theorie\n"; 
    }
@@ -197,15 +197,10 @@
    if ($rijbewijs_bus->num_rows == 1) {
    	$rijbewijzen .= "Bus\n";
    }
-   
+
    $kladblok = $con->query("SELECT text FROM kladblok WHERE userid = '".$_GET['id']."'");
    $rowKladblok = $kladblok->fetch_assoc();
-   
-   //LiveLog
-   if (!isset($_GET['nolog'])) {
-   	$insert = $con->query("INSERT INTO livelog (agent,burger,burgerid,ip) VALUES ('".htmlspecialchars($_SESSION['name'])."','".htmlspecialchars($row['firstname'])." ".htmlspecialchars($row['lastname'])."','".$_GET['id']."','".$_SERVER['REMOTE_ADDR']."')");
-   }
-   
+
    $checkSig = $con->query("SELECT * FROM informatie WHERE gameid = '".$con->real_escape_string($_GET['id'])."' AND gesignaleerd = true ORDER BY id DESC");
    if ($checkSig->num_rows != 0) {
    	$signalering['status'] = true;
@@ -293,31 +288,31 @@
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
@@ -325,13 +320,13 @@
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="gebruikers.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
@@ -352,9 +347,9 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                <li class="breadcrumb-item">
-                  <a href="index">Dashboard</a>
+                  <a href="index.php">Dashboard</a>
                </li>
-               <li class="breadcrumb-item"><a href="basisadministratie">Basisadministratie</a></li>
+               <li class="breadcrumb-item"><a href="basisadministratie.php">Basisadministratie</a></li>
                <li class="breadcrumb-item active"><?php echo htmlspecialchars($row['firstname'])." ".htmlspecialchars($row['lastname']); ?></li>
             </ol>
             <form method="POST">
@@ -382,7 +377,7 @@
                <?php if (@$_SESSION['rang'] != "G4S") {?><br><a class="btn btn-danger" href="?action=invorderen&owner=<?php echo $row['identifier']; ?>&persoon=<?php echo $identifier; ?>">Invorderen</a><br><?php } ?><br>
                <?php if (@$_SESSION['role'] == "admin") {
                   ?>
-               <!--<a class="btn btn-primary" href="huiszoekingafschrift?id=<?php echo $_GET['id']; ?>">Huiszoeking uitvoeren</a><br>
+               <!--<a class="btn btn-primary" href="huiszoekingafschrift.php?id=<?php echo $_GET['id']; ?>">Huiszoeking uitvoeren</a><br>
                   <b>Voer deze actie UITSLUITEND uit met toestemming van de Officier van Justitie</b>-->
                <?php
                   }			
@@ -407,16 +402,8 @@
             </form>
             <?php } ?>
             <hr>
+
             <?php if (@$_SESSION['rang'] != "G4S") {?>
-            <!--<form method="POST">
-               Wanneer iemand de stad heeft verlaten kan je hem via deze optie opsluiten. Dit werkt <b><u>uitsluitend</u></b> als de persoon de stad al uit is<br>
-               <em><b>Gevangenistijd (seconde):</b></em>
-               <input type="hidden" name="form" value="jail">
-               <input type="hidden" name="persoon" value="<?php //echo $_GET['id']; ?>">
-               <input type="hidden" name="steam" value="<?php //echo $row['identifier']; ?>">
-               <input type="number" name="time" class="form-control"><br>
-               <input type="submit" value="Opsluiten" class="btn btn-danger btn-block">
-               </form>-->
             <?php } ?>
             <hr>
             <h2>Notities</h2>
@@ -479,14 +466,6 @@
                   $statusplain = "Goedgekeurd";
                   }
                   $t = $s->fetch_assoc();
-                  
-                  //Get vehicle model
-                  //Insert magic 
-                  //echo "<pre>";
-                  // var_dump($vehicle);
-                  //$voertuigq = $ddcon->query("SELECT name FROM vehicles WHERE hash='".$vehicle->model."' LIMIT 1");
-                  //$rowv = $voertuigq->fetch_assoc();
-                  
                   ?>
                <tr>
                   <td>
@@ -498,7 +477,7 @@
                      </div>
                   </td>
                   <td><?php echo $roww['type']; ?></td>
-                  <td><a href="rdw?kenteken=<?php echo $roww['plate']; ?>"><button type="button" class="btn btn-primary btn-sm">Voertuig informatie</button></a></td>
+                  <td><a href="rdw.php?kenteken=<?php echo $roww['plate']; ?>"><button type="button" class="btn btn-primary btn-sm">Voertuig informatie</button></a></td>
                   <!--<?php if ($_SESSION['role'] == "admin") { ?><td><a onclick="if (!confirm('Wil je dit voertuig in beslag nemen? Deze actie kan je niet omdraaien!')) { return false }" href="?action=beslag&id=<?php echo $roww['owner']; ?>&user=<?php echo $steamid ?>&kenteken=<?php echo $vehicle->plate; ?>&voertuig=<?php echo $vehicle->model; ?>&persoon=<?php echo $identifier; ?>">In beslag nemen</a></td><?php } ?>-->		  
                </tr>
                <?php 
@@ -515,7 +494,7 @@
                $totaalboetesrow = $totaalboetes->fetch_assoc();
                ?>
             <h2>Openstaande bekeuringen (&euro;<?php if ($totaalboetesrow['a'] == null) { echo "0"; } else { echo $totaalboetesrow['a']; } ?>)</a></h2>
-            <a class="btn btn-primary" href="./boete?persoon=<?php echo $identifier; ?>">Verbaal aanzeggen</a> &nbsp; <?php if ($_SESSION['role'] == "admin") { ?><a href="?action=delfine&id=all&persoon=<?php echo $identifier; ?>&steam=<?php echo $steamid; ?>" class="btn btn-danger">Alles verwijderen</a><?php } ?><br>
+            <a class="btn btn-primary" href="./boete.php?persoon=<?php echo $identifier; ?>">Verbaal aanzeggen</a> &nbsp; <?php if ($_SESSION['role'] == "admin") { ?><a href="?action=delfine&id=all&persoon=<?php echo $identifier; ?>&steam=<?php echo $steamid; ?>" class="btn btn-danger">Alles verwijderen</a><?php } ?><br>
             <br>
             <table id="badm" class="table">
                <tr>
@@ -529,7 +508,7 @@
                </tr>
                <?php
                   $boetesq = $ddcon->query("SELECT id, identifier, sender, target_type, target, label, amount FROM billing WHERE identifier = '".$steamid."' AND target = 'society_police'");
-                  
+
                   while ($row = $boetesq->fetch_assoc()) {
                   if (substr($row['sender'],0,6) == "steam:") {
                    $verbalisantq = $ddcon->query("SELECT CONCAT(LEFT(UCASE(firstname),1),'.',UCASE(lastname)) as verbalisant FROM users WHERE identifier = '".$row['sender']."'");

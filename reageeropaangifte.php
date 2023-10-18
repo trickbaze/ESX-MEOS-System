@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	'".$con->real_escape_string($_SESSION['name'])."'
 	)");
 	if ($insert) {
-		Header("Location: aangifte?id=".$_POST['aangifte']);
+		Header("Location: aangifte.php?id=".$_POST['aangifte']);
 	} else {
 		die();
 	}

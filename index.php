@@ -1,8 +1,8 @@
 <?php
    require "config.php";
-   
+
    if ($_SESSION['loggedin'] != TRUE) {
-   	Header("Location: login");
+   	Header("Location: login.php");
    }
    $inw = $ddcon->query("SELECT * FROM users");
    $hvs = $ddcon->query("SELECT * FROM users WHERE job = 'police' OR job = 'ambulance'");
@@ -10,21 +10,21 @@
    $voe = $ddcon->query("SELECT * FROM owned_vehicles");
    $moncon = $ddcon->query("SELECT sum(money) as tot FROM users");
    $openb = $ddcon->query("SELECT sum(amount) as tot FROM billing WHERE target='society_police'");
-   
+
    $logc = $con->query("SELECT * FROM livelog");
-   
+
    if ($_SERVER['REQUEST_METHOD'] == "POST") {
    	if (isset($_POST['anotitie']) AND trim($_POST['anotitie']) != "") {
    		$con->query("INSERT INTO anotitie (user_id,text) VALUES ('".$con->real_escape_string($_SESSION['id'])."','".$con->real_escape_string($_POST['anotitie'])."')");
-   		Header("Location:index");
+   		Header("Location:index.php");
    	}
    }
-   
+
    if (@$_GET['action'] == "deleteanotitie") {
    	$con->query("DELETE FROM anotitie WHERE id = '".$_GET['id']."'");
    	Header("Location: index.php");
    }
-   
+
    $specialisaties = $con->query("SELECT specialisaties FROM users WHERE id = '".$_SESSION['id']."'");
    //var_dump($specialisaties->fetch_assoc()['specialisaties']);
    //exit;
@@ -63,31 +63,31 @@
 
               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
@@ -96,13 +96,13 @@
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="gebruikers.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
@@ -124,7 +124,7 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
+            <a href="index.php">Dashboard</a>
          </li>
       </ol>
       <div class="row">
@@ -132,7 +132,7 @@
             if ($_SESSION['role'] != "anwb") {
             ?>
          <div class="col-xl-3 col-sm-6 mb-3">
-            <a href="basisadministratie" class="fill-div">
+            <a href="basisadministratie.php" class="fill-div">
                <div class="bg-primary knop">
                   <img id="icon-meos" src="img/user-shape.svg">
                   <p class="text-button">Persoon</p>
@@ -141,7 +141,7 @@
          </div>
          <?php } ?>
          <div class="col-xl-3 col-sm-6 mb-3">
-            <a href="rdw" class="fill-div">
+            <a href="rdw.php" class="fill-div">
                <div class="bg-primary knop">
                   <img id="icon-meos" src="img/sports-car.svg">
                   <p class="text-button">Vervoersmiddel</p>
@@ -152,7 +152,7 @@
             if ($_SESSION['role'] != "anwb") {
             ?>
          <div class="col-xl-3 col-sm-6 mb-3">
-            <a href="aangiftes" class="fill-div">
+            <a href="aangiftes.php" class="fill-div">
                <div class="bg-primary knop">
                   <img id="icon-meos" src="img/file.svg">
                   <p class="text-button">Aangifte</p>
@@ -161,7 +161,7 @@
          </div>
          <?php } ?>
          <div class="col-xl-3 col-sm-6 mb-3">
-            <a href="beveiligingscentrum" class="fill-div">
+            <a href="beveiligingscentrum.php" class="fill-div">
                <div class="bg-primary knop">
                   <img id="icon-meos" src="img/White_lock.svg">
                   <p class="text-button">Beveiligingscentrum</p>
@@ -171,9 +171,9 @@
       </div>
       <h1>
       <?php 
- 
+
          $tijd = date("G"); //bepaal de tijd in uren 
-         
+
          if($tijd < 6) 
             { 
                   echo "Goedenacht,"; 
@@ -219,16 +219,19 @@
       <h1>Logboek</h1>
       <br>
       <div class="list-group">
+
          <?php
             if ($_SESSION['role'] == "admin") {
               $sel = $con->query("SELECT DISTINCT burgerid,agent,burger FROM livelog ORDER BY id DESC LIMIT 6");
               while ($row = $sel->fetch_assoc()) {
             	  if (trim($row['agent']) != "") {
-             ?>
+         ?>
+
          <a href="gegevens.php?id=<?php echo $row['burgerid'] ?>" class="list-group-item">
             <h4 class="list-group-item-heading"><?php echo $row['burger'] ?></h4>
             <p class="list-group-item-text"><?php echo $row['agent'] ?> heeft <?php echo $row['burger']; ?> opgezocht.</p>
          </a>
+
          <?php ?>
          <?php
             }
@@ -246,7 +249,7 @@
                  $sel = $con->query("SELECT notitie, gameid FROM informatie WHERE gesignaleerd = true ORDER BY id");
                  while ($row = $sel->fetch_assoc()) {
                	  $user = $ddcon->query("SELECT CONCAT(firstname, ' ', lastname) as name FROM users WHERE identifier = '".$row['gameid']."'");
-               
+
                 ?>
             <a href="gegevens.php?id=<?php echo $row['gameid'] ?>" class="list-group-item">
                <h4 class="list-group-item-heading">Signalering van <?php echo $user->fetch_assoc()['name']; ?></h4>
@@ -266,7 +269,7 @@
                </div>
             </div>
          </footer>
-         
+
          <!-- Scroll to Top Button-->
          <a class="scroll-to-top rounded" href="#page-top">
          <i class="fa fa-angle-up"></i>

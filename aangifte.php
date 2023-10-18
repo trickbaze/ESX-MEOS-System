@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	'".$con->real_escape_string($_POST['verklaring'])."'
 	)");
 	if ($insert) {
-		Header("Location: aangiftes");
+		Header("Location: aangiftes.php");
 	} else {
 		
 	}
@@ -77,31 +77,31 @@ if (isset($_GET['id'])) {
 
               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
@@ -110,13 +110,13 @@ if (isset($_GET['id'])) {
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="gebruikers.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
@@ -139,11 +139,11 @@ if (isset($_GET['id'])) {
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <?php if (!isset($_GET['id'])) { ?><li class="breadcrumb-item active">Aangifte invoeren</li> <?php } ?>
         <?php if (isset($_GET['id'])) { ?>
-		<li class="breadcrumb-item"><a href="aangiftes">Aangifteadministratie</a></li>
+		<li class="breadcrumb-item"><a href="aangiftes.php">Aangifteadministratie</a></li>
 		<li class="breadcrumb-item active">Aangifte (<?php echo $_GET['id']; ?>)</li> 
 		<?php } ?>
       </ol>
@@ -183,7 +183,7 @@ placeholder="Voer de verklaring woordelijk in, de rechercheur moet precies kunne
 			<div class="col-sm-6"><input type="text" name="opnamedatum" class="form-control" placeholder="Opnamedatum" <?php if (isset($_GET['id'])) { ?>  value="<?php echo $row['opnamedatum']; ?>" readonly <?php } ?> required <?php if (isset($_GET['id'])) { ?> readonly <?php } ?>></div>
 			<div class="col-sm-6"><em><b>Status</b></em>:</div>
 			<div class="col-sm-6"><input type="text" name="status" class="form-control" placeholder="Status" <?php if (isset($_GET['id'])) { ?>  value="<?php if ($row['status'] == "open") { echo "Geopend"; } if ($row['status'] == "closed") { echo "Gesloten"; } if ($row['status'] == "hold") { echo "In de wacht"; } ?>" readonly <?php } ?> required <?php if (isset($_GET['id'])) { ?> readonly <?php } ?>></div><br>
-			<div class="col-sm-6"><a class="btn btn-primary btn-block" target="_blank" href="aangifteafschrift?id=<?php echo $_GET['id']; ?>">Afschrift openen</a></div><br>
+			<div class="col-sm-6"><a class="btn btn-primary btn-block" target="_blank" href="aangifteafschrift.php?id=<?php echo $_GET['id']; ?>">Afschrift openen</a></div><br>
 			<?php
 			} else {
 			?>
