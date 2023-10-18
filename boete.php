@@ -9,14 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$row = $fine->fetch_assoc();
 	$insert = $ddcon->query("INSERT INTO billing (identifier, sender, target_type, target, label, amount) VALUES ('".$con->real_escape_string($_POST['steamid'])."','".$con->real_escape_string($_SESSION['name'])."','society','society_police','".$ddcon->real_escape_string($row['label'])."','".$ddcon->real_escape_string($row['amount'])."')");
 	if ($insert) {
-		Header("Location: gegevens?id=".$_POST['persoon']);
+		Header("Location: gegevens.php?id=".$_POST['persoon']);
 	} else {
 		die($ddcon->error);
 	}
 }
 
 if ($_SESSION['rang'] == "G4S") {
-	Header("Location: index");
+	Header("Location: index.php");
 }
 
 $mensenq = $ddcon->query("SELECT identifier, concat(firstname,' ',lastname) as name FROM users WHERE identifier='".$ddcon->real_escape_string($_GET['persoon'])."' ORDER BY lastname DESC");
@@ -65,31 +65,31 @@ $steamid = $row['identifier'];
 
               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
@@ -98,13 +98,13 @@ $steamid = $row['identifier'];
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="users.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
@@ -151,7 +151,7 @@ $steamid = $row['identifier'];
 		<hr>
 		<input type="submit" value="Afronden" class="btn btn-block btn-success"><br>
 		<?php if ($_SESSION['role'] == "admin") { ?>
-		<a class="btn btn-block btn-primary" href="./vrijeboete?persoon=<?php echo $_GET['persoon']; ?>">Feitcode staat niet in lijst</a>
+		<a class="btn btn-block btn-primary" href="./vrijeboete.php?persoon=<?php echo $_GET['persoon']; ?>">Feitcode staat niet in lijst</a>
 		<?php } ?>
 		</form>
 		

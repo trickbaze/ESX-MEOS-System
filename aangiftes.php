@@ -4,28 +4,28 @@ if ($_SESSION['loggedin'] != TRUE) {
 	Header("Location: login.php?returnpage=aangiftes");
 }
 if ($_SESSION['role'] == "anwb") {
-	Header("Location: index");
+	Header("Location: index.php");
 }
 if (isset($_GET['action'])) {
 	if (@$_GET['action'] == "open") {
 		$update = $con->query("UPDATE aangifte SET status='open' WHERE id='".$con->real_escape_string($_GET['id'])."'");
-		Header("Location: aangiftes");
+		Header("Location: aangiftes.php");
 	}
 	if (@$_GET['action'] == "hold") {
 		$update = $con->query("UPDATE aangifte SET status='hold' WHERE id='".$con->real_escape_string($_GET['id'])."'");
-		Header("Location: aangiftes");
+		Header("Location: aangiftes.php");
 	}
 	if (@$_GET['action'] == "close") {
 		$update = $con->query("UPDATE aangifte SET status='closed' WHERE id='".$con->real_escape_string($_GET['id'])."'");
-		Header("Location: aangiftes");
+		Header("Location: aangiftes.php");
 	}
 	if (@$_GET['action'] == "delete") {
 		$update = $con->query("DELETE FROM aangifte WHERE id='".$con->real_escape_string($_GET['id'])."'");
-		Header("Location: aangiftes");
+		Header("Location: aangiftes.php");
 	}
 	if (@_GET['action' == "behandelen"]) {
 		$update = $con->query("UPDATE aangifte SET behandelaar='".$con->real_escape_string($_SESSION['name'])."' WHERE id='".$con->real_escape_string($_GET['id'])."'");
-		Header("Location: aangiftes");
+		Header("Location: aangiftes.php");
 	}
 }
 
@@ -72,31 +72,31 @@ $mensenq = $con->query("SELECT id, opnamedatum, concat(aangever_voornaam, ' ' ,a
 
               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
@@ -105,13 +105,13 @@ $mensenq = $con->query("SELECT id, opnamedatum, concat(aangever_voornaam, ' ' ,a
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="users.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
@@ -133,12 +133,12 @@ $mensenq = $con->query("SELECT id, opnamedatum, concat(aangever_voornaam, ' ' ,a
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Aangifteadministratie</li>
       </ol>
 		<hr>
-		<a href="aangifte" class="btn btn-success btn-block">Aangifte invoeren</a>
+		<a href="aangifte.php" class="btn btn-success btn-block">Aangifte invoeren</a>
 		<table id="badm" class="table">
 		  <tr>
 			<th>Volgnummer</th>
@@ -152,7 +152,7 @@ $mensenq = $con->query("SELECT id, opnamedatum, concat(aangever_voornaam, ' ' ,a
 		  while ($row = $mensenq->fetch_assoc()) {  
 		  ?>
 		  <tr>
-			<td><a href="aangifte?id=<?php echo $row['id']; ?>">Lezen (<?php echo $row['id']; ?>)</a></td>
+			<td><a href="aangifte.php?id=<?php echo $row['id']; ?>">Lezen (<?php echo $row['id']; ?>)</a></td>
 			<td><?php echo htmlspecialchars($row['opnamedatum']); ?></td> 
 			<td><?php echo htmlspecialchars($row['name']); ?></td>
 			<td><?php if ($row['status'] == "open") { echo '<span class="label label-success">Geopend</span>'; } if ($row['status'] == "closed") { echo '<span class="label label-danger">Gesloten</span>'; } if ($row['status'] == "hold") { echo '<span class="label label-warning">In de wacht</span>'; } ?></td>

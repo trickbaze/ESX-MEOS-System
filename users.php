@@ -9,11 +9,11 @@ if ($_SESSION['role'] != "admin") {
 
 if (@$_GET['action'] == "delete") {
 	$con->query("DELETE FROM users WHERE id = '".$con->real_escape_string($_GET['id'])."'");
-	Header("Location: gebruikers");
+	Header("Location: users.php");
 }
 if (@$_GET['action'] == "ww") {
 	$con->query("UPDATE users SET password='".password_hash($con->real_escape_string($_GET['password']),PASSWORD_BCRYPT)."' WHERE id = '".$con->real_escape_string($_GET['id'])."'");
-	Header("Location: gebruikers");
+	Header("Location: users.php");
 }
 if (@$_GET['action'] == "status") {
 	$statusq = $con->query("SELECT status FROM users WHERE id='".$con->real_escape_string($_GET['id'])."' LIMIT 1");
@@ -24,7 +24,7 @@ if (@$_GET['action'] == "status") {
 	if ($status['status'] == "inactive") {
 		$con->query("UPDATE users SET status='active' WHERE id = '".$con->real_escape_string($_GET['id'])."'");
 	}
-	Header("Location: gebruikers");
+	Header("Location: users.php");
 }
 if (@$_GET['action'] == "promotie") {
 	$rangq = $con->query("SELECT rang FROM users WHERE id='".$con->real_escape_string($_GET['id'])."' LIMIT 1");
@@ -101,7 +101,7 @@ if (@$_GET['action'] == "degradatie") {
 	if ($rang['rang'] == "1e Hoofd Commissaris") {
 		$con->query("UPDATE users SET rang='Hoofd Commissaris' WHERE id = '".$con->real_escape_string($_GET['id'])."'");
 	}
-	Header("Location: gebruikers");
+	Header("Location: users.php");
 }
 
 if (@$_GET['action'] == "delspec") {
@@ -148,32 +148,32 @@ if (@$_GET['action'] == "delspec") {
 	
 		$result = curl_exec($ch);
 
-	Header("Location: gebruikers");
+	Header("Location: users.php");
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	if (trim($_POST['username']) == NULL) {
-		Header("Location: gebruikers");
+		Header("Location: users.php");
 		exit;
 	}
 	if (trim($_POST['password']) == NULL) {
-		Header("Location: gebruikers");
+		Header("Location: users.php");
 		exit;
 	}
 	if (trim($_POST['status']) == NULL) {
-		Header("Location: gebruikers");
+		Header("Location: users.php");
 		exit;
 	}
 	if (trim($_POST['rol']) == NULL) {
-		Header("Location: gebruikers");
+		Header("Location: users.php");
 		exit;
 	}
 	if (trim($_POST['rang']) == NULL) {
-		Header("Location: gebruikers");
+		Header("Location: users.php");
 		exit;
 	}
 	if (trim($_POST['name']) == NULL) {
-		Header("Location: gebruikers");
+		Header("Location: users.php");
 		exit;
 	}
 	
@@ -240,31 +240,31 @@ $newpass = rand(11111111,99999999);
 
               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
@@ -273,13 +273,13 @@ $newpass = rand(11111111,99999999);
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="users.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
@@ -301,7 +301,7 @@ $newpass = rand(11111111,99999999);
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Gebruikers</li>
       </ol>

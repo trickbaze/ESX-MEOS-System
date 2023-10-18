@@ -5,7 +5,7 @@ if ($_SESSION['loggedin'] != TRUE) {
 }
 
 if ($_SESSION['rang'] == "G4S") {
-	Header("Location: index");
+	Header("Location: index.php");
 }
 
 if (isset($_GET['kenteken'])) {
@@ -27,12 +27,12 @@ if (isset($_GET['kenteken'])) {
 if (@$_GET['actie'] == "afkeuren") {
 	$i = $con->query("INSERT INTO rdwwok (voertuigid,reason) VALUES ('".$_GET['id']."','".$_GET['reason']."')");
 	$log = $con->query("INSERT INTO rdwlog (user,voertuigid,action,ip,reason,plate) VALUES ('".$_SESSION['id']."','".$_GET['id']."','afkeuren','".$_SERVER['REMOTE_ADDR']."', '".$_GET['reason']."', '".$_GET['kenteken']."')");
-	Header("Location:rdw?kenteken=".$_GET['kenteken']);
+	Header("Location:rdw.php?kenteken=".$_GET['kenteken']);
 }
 if (@$_GET['actie'] == "goedkeuren") {
 	$i = $con->query("DELETE FROM rdwwok WHERE voertuigid = '".$_GET['id']."'");
 	$log = $con->query("INSERT INTO rdwlog (user,voertuigid,action,ip,reason,plate) VALUES ('".$_SESSION['id']."','".$_GET['id']."','goedkeuren','".$_SERVER['REMOTE_ADDR']."','".$_GET['reason']."', '".$_GET['kenteken']."')");
-	Header("Location:rdw?kenteken=".$_GET['kenteken']);
+	Header("Location:rdw.php?kenteken=".$_GET['kenteken']);
 }
 ?>
 <!DOCTYPE html>
@@ -80,31 +80,31 @@ if (@$_GET['actie'] == "goedkeuren") {
 
               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
@@ -113,13 +113,13 @@ if (@$_GET['actie'] == "goedkeuren") {
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="users.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
@@ -141,10 +141,10 @@ if (@$_GET['actie'] == "goedkeuren") {
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
 		<li class="breadcrumb-item">
-   		  <a href="voertuigregistratie">Voertuigregistratie</a>
+   		  <a href="voertuigregistratie.php">Voertuigregistratie</a>
 		</li>
         <li class="breadcrumb-item active">RDW</li>
       </ol>

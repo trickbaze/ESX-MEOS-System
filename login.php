@@ -2,14 +2,14 @@
 require "config.php";
 if (isset($_GET['returnpage'])) {
 	$_SESSION['returnpage'] = $_GET['returnpage'];
-	Header("Location: login");
+	Header("Location: login.php");
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST" AND $_POST['form'] == "login") {
 	if (trim($_POST['username']) == NULL) {
-		Header("Location:login?error");
+		Header("Location:login.php?error");
 	}
 	if (trim($_POST['password']) == NULL) {
-		Header("Location:login?error");
+		Header("Location:login.php?error");
 	}
 	
 	$query = $con->query("SELECT id,password,role,name,role,rang,2fa FROM users WHERE username = '".$con->real_escape_string($_POST['username'])."' AND status = 'active'");
@@ -40,15 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" AND $_POST['form'] == "login") {
 				if (isset($_SESSION['returnpage'])) {
 			Header("Location: ".$_SESSION['returnpage']);
 		} else {
-			Header("Location: index");
+			Header("Location: index.php");
 		}
 			}
 		} else {
 			//Wachtwoord klopt niet
-			Header("Location: login?error");
+			Header("Location: login.php?error");
 		}
 	} else {
-		Header("Location: login?error");
+		Header("Location: login.php?error");
 	}
 	
 }
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"  AND $_POST['form'] == "2fa") {
 		if (isset($_SESSION['returnpage'])) {
 			Header("Location: ".$_SESSION['returnpage']);
 		} else {
-			Header("Location: index");
+			Header("Location: index.php");
 		}
 	} else {
 		Header("Location: ?result=2fafail");

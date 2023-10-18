@@ -1,7 +1,7 @@
 <?php
    require "config.php";
    if ($_SESSION['loggedin'] != TRUE) {
-   	Header("Location: login?returnpage=beveiligingscentrum");
+   	Header("Location: login.php?returnpage=beveiligingscentrum");
    }
    if ($_SERVER['REQUEST_METHOD'] == "POST") {
    	if ($_POST['form'] == "2fa") {
@@ -13,9 +13,9 @@
    		if ($checkResult) {
    			$enable2FA = $con->query("UPDATE users SET 2fa = '".$_POST['secret']."' WHERE id = '".$_SESSION['id']."'");
    			$_SESSION['2fa'] = TRUE;
-   			Header("Location: beveiligingscentrum?result=2faok");
+   			Header("Location: beveiligingscentrum.php?result=2faok");
    		} else {
-   			Header("Location: beveiligingscentrum?result=2fafail");
+   			Header("Location: beveiligingscentrum.php?result=2fafail");
    		}
    		exit;
    	}
@@ -25,12 +25,12 @@
    		//password2 = new password field 2
    		
    		if (trim($_POST['password']) == "" OR trim($_POST['password1']) == "" OR trim($_POST['password2']) == "") {
-   			Header("Location: beveiligingscentrum?emp");
+   			Header("Location: beveiligingscentrum.php?emp");
    			exit;
    		}
    		
    		if (trim($_POST['password1']) != $_POST['password2']) {
-   			Header("Location: beveiligingscentrum?p12");
+   			Header("Location: beveiligingscentrum.php?p12");
    			exit;
    		}
    		
@@ -42,10 +42,10 @@
    			$updatePassword = $con->query("UPDATE users SET password = '".$password."' WHERE id = '".$_SESSION['id']."'");
    			//exit($con->error);
    			session_destroy();
-   			Header("Location: login");
+   			Header("Location: login.php");
    			exit;
    		} else {
-   			Header("Location: beveiligingscentrum?cur");
+   			Header("Location: beveiligingscentrum.php?cur");
    		}
    		
    	}
@@ -75,7 +75,7 @@
    	)");
    	}
    	$done = true;
-   	Header("Location: beveiligingscentrum");
+   	Header("Location: beveiligingscentrum.php");
    	exit;
    }
    ?>
@@ -101,7 +101,7 @@
    </head>
    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
       <!-- Navigation-->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-red fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-red fixed-top" id="mainNav">
          <a class="navbar-brand" href="#"><img id="logo-meos" src="img/logo.png"></a>
          <p id="header-text">MEOS</p>
          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,53 +109,56 @@
          </button>
          <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-               <!-- Default user section-->
+
+              <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="index">
+                  <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Homepagina</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="basisadministratie">
+                  <a class="nav-link" href="basisadministratie.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Basisadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="rdw">
+                  <a class="nav-link" href="rdw.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Voertuigregistratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="training">
+                  <a class="nav-link" href="training.php">
                   <i class="fa fa-fw fa-book"></i>
                   <span class="nav-link-text">Training</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="aangiftes">
+                  <a class="nav-link" href="aangiftes.php">
                   <i class="fa fa-fw fa-area-chart"></i>
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
                </li>
+
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="gebruikers">
+                  <a class="nav-link" href="users.php">
                   <i class="fa fa-user-circle"></i>
                   <span class="nav-link-text"> Gebruikersadministratie</span>
                   </a>
                </li>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                  <a class="nav-link" href="jaillog">
+                  <a class="nav-link" href="jaillog.php">
                   <i class="fa fa-history"></i>
                   <span class="nav-link-text">Logboeken</span>
                   </a>
                </li>
                <?php } ?>
-               <!-- Default user section-->
+
+              <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                   <a class="nav-link" href="exit.php">
                   <i class="fa fa-sign-out"></i>
