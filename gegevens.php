@@ -201,11 +201,6 @@
    $kladblok = $con->query("SELECT text FROM kladblok WHERE userid = '".$_GET['id']."'");
    $rowKladblok = $kladblok->fetch_assoc();
    
-   //LiveLog
-   if (!isset($_GET['nolog'])) {
-   	$insert = $con->query("INSERT INTO livelog (agent,burger,burgerid,ip) VALUES ('".htmlspecialchars($_SESSION['name'])."','".htmlspecialchars($row['firstname'])." ".htmlspecialchars($row['lastname'])."','".$_GET['id']."','".$_SERVER['REMOTE_ADDR']."')");
-   }
-   
    $checkSig = $con->query("SELECT * FROM informatie WHERE gameid = '".$con->real_escape_string($_GET['id'])."' AND gesignaleerd = true ORDER BY id DESC");
    if ($checkSig->num_rows != 0) {
    	$signalering['status'] = true;

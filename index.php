@@ -56,8 +56,7 @@
          </button>
          <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-
-              <!-- Default user section-->
+               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                   <a class="nav-link" href="index.php">
                   <i class="fa fa-home"></i>
@@ -88,7 +87,6 @@
                   <span class="nav-link-text">Aangifteadministratie</span>
                   </a>
                </li>
-
                <!-- Admin Section-->
                <?php if ($_SESSION['role'] == "admin") { ?>
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
@@ -104,8 +102,7 @@
                   </a>
                </li>
                <?php } ?>
-
-              <!-- Default user section-->
+               <!-- Default user section-->
                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                   <a class="nav-link" href="exit.php">
                   <i class="fa fa-sign-out"></i>
@@ -117,144 +114,100 @@
       </nav>
       <div class="content-wrapper">
       <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-         <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-         </li>
-      </ol>
-      <div class="row">
-         <?php
-            if ($_SESSION['role'] != "anwb") {
-            ?>
-         <div class="col-xl-3 col-sm-6 mb-3">
-            <a href="basisadministratie.php" class="fill-div">
-               <div class="bg-primary knop">
-                  <img id="icon-meos" src="img/user-shape.svg">
-                  <p class="text-button">Persoon</p>
-               </div>
-            </a>
-         </div>
-         <?php } ?>
-         <div class="col-xl-3 col-sm-6 mb-3">
-            <a href="rdw.php" class="fill-div">
-               <div class="bg-primary knop">
-                  <img id="icon-meos" src="img/sports-car.svg">
-                  <p class="text-button">Vervoersmiddel</p>
-               </div>
-            </a>
-         </div>
-         <?php
-            if ($_SESSION['role'] != "anwb") {
-            ?>
-         <div class="col-xl-3 col-sm-6 mb-3">
-            <a href="aangiftes.php" class="fill-div">
-               <div class="bg-primary knop">
-                  <img id="icon-meos" src="img/file.svg">
-                  <p class="text-button">Aangifte</p>
-               </div>
-            </a>
-         </div>
-         <?php } ?>
-         <div class="col-xl-3 col-sm-6 mb-3">
-            <a href="beveiligingscentrum.php" class="fill-div">
-               <div class="bg-primary knop">
-                  <img id="icon-meos" src="img/White_lock.svg">
-                  <p class="text-button">Beveiligingscentrum</p>
-               </div>
-            </a>
-         </div>
-      </div>
-      <h1>
-      <?php 
- 
-         $tijd = date("G"); //bepaal de tijd in uren 
-         
-         if($tijd < 6) 
-            { 
-                  echo "Goedenacht,"; 
-            } 
-         elseif($tijd < 12) 
-            { 
-                  echo "Goedemorgen,"; 
-            } 
-         elseif($tijd < 18)   
-            { 
-                  echo "Goedemiddag,"; 
-            } 
-         else 
-            { 
-                  echo "Goedeavond,";   
-            } 
-         ?> 
-         <?php echo $_SESSION['name']; ?><br>
-         In het MEOS systeem van <?php echo $site_name; ?>
-      </h1>
-      <b><u>Dit systeem is uitsluitend voor geautoriseerd gebruik. Misbruik van dit systeem kan leiden tot ontslag en/of strafvervolging</u></b><br>
-      <?php
-         if ($_SESSION['role'] != "anwb") {
-         ?>
-      <h1></br> Algemene Notities</h1>
-      <form method="POST">
-         <textarea name="anotitie" class="form-control" placeholder="Notitie"></textarea>
-         </p>
-         <input type="submit" class="btn btn-success" value="Opslaan">
-      </form>
-      <hr>
-      <?php
-         $getNotities = $con->query("SELECT n.id as nid, u.id, u.name, n.text, n.date FROM anotitie AS n INNER JOIN users AS u ON u.id=n.user_id ORDER BY n.id DESC LIMIT 10");
-         while ($row = $getNotities->fetch_assoc()) {
-          ?>
-      <b><?php echo htmlspecialchars($row['name']); ?></b> - <em><?php echo $row['date']; ?> <?php if ($_SESSION['id'] == $row['id'] OR $_SESSION['role'] == "admin") { echo "<a href='?action=deleteanotitie&id=".$row['nid']."'>(verwijder)</a>"; } ?></em> <br>
-      <?php echo htmlspecialchars($row['text']); ?>
-      <hr>
-      <?php
-         }
-         ?>
-      <?php } ?>
-<!--       <h1>Logboek</h1>
-      <br>
-      <div class="list-group">
-         <?php
-            if ($_SESSION['role'] == "admin") {
-              $sel = $con->query("SELECT DISTINCT burgerid,agent,burger FROM livelog ORDER BY id DESC LIMIT 6");
-              while ($row = $sel->fetch_assoc()) {
-            	  if (trim($row['agent']) != "") {
-             ?>
-         <a href="gegevens.php?id=<?php echo $row['burgerid'] ?>" class="list-group-item">
-            <h4 class="list-group-item-heading"><?php echo $row['burger'] ?></h4>
-            <p class="list-group-item-text"><?php echo $row['agent'] ?> heeft <?php echo $row['burger']; ?> opgezocht.</p>
-         </a>
-         <?php ?>
-         <?php
-            }
-            }
-            } else {
-            echo "Geen toegang tot logboek";
-            }
-         ?> -->
-<!--          <hr>
-          <h1>Signalementen</h1>
-         <br>
-         <div class="list-group">
+         <!-- Breadcrumbs-->
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+               <a href="#">Dashboard</a>
+            </li>
+         </ol>
+         <div class="row">
             <?php
                if ($_SESSION['role'] != "anwb") {
-                 $sel = $con->query("SELECT notitie, gameid FROM informatie WHERE gesignaleerd = true ORDER BY id");
-                 while ($row = $sel->fetch_assoc()) {
-               	  $user = $ddcon->query("SELECT CONCAT(firstname, ' ', lastname) as name FROM users WHERE identifier = '".$row['gameid']."'");
-               
-                ?>
-            <a href="gegevens.php?id=<?php echo $row['gameid'] ?>" class="list-group-item">
-               <h4 class="list-group-item-heading">Signalering van <?php echo $user->fetch_assoc()['name']; ?></h4>
-               <p class="list-group-item-text"<?php echo $user->fetch_assoc()['name']; ?> >is voor de politie gesignaleerd: <?php echo $row['notitie']; ?></p>
-            </a>
-            <?php
-               }
-               } else {
-               echo "Geen toegang tot logboek";
-               }
                ?>
-         </div> -->
+            <div class="col-xl-3 col-sm-6 mb-3">
+               <a href="basisadministratie.php" class="fill-div">
+                  <div class="bg-primary knop">
+                     <img id="icon-meos" src="img/user-shape.svg">
+                     <p class="text-button">Persoon</p>
+                  </div>
+               </a>
+            </div>
+            <?php } ?>
+            <div class="col-xl-3 col-sm-6 mb-3">
+               <a href="rdw.php" class="fill-div">
+                  <div class="bg-primary knop">
+                     <img id="icon-meos" src="img/sports-car.svg">
+                     <p class="text-button">Vervoersmiddel</p>
+                  </div>
+               </a>
+            </div>
+            <?php
+               if ($_SESSION['role'] != "anwb") {
+               ?>
+            <div class="col-xl-3 col-sm-6 mb-3">
+               <a href="aangiftes.php" class="fill-div">
+                  <div class="bg-primary knop">
+                     <img id="icon-meos" src="img/file.svg">
+                     <p class="text-button">Aangifte</p>
+                  </div>
+               </a>
+            </div>
+            <?php } ?>
+            <div class="col-xl-3 col-sm-6 mb-3">
+               <a href="beveiligingscentrum.php" class="fill-div">
+                  <div class="bg-primary knop">
+                     <img id="icon-meos" src="img/White_lock.svg">
+                     <p class="text-button">Beveiligingscentrum</p>
+                  </div>
+               </a>
+            </div>
+         </div>
+         <h1>
+            <?php 
+               $tijd = date("G"); //bepaal de tijd in uren 
+               
+               if($tijd < 6) 
+                  { 
+                        echo "Goedenacht,"; 
+                  } 
+               elseif($tijd < 12) 
+                  { 
+                        echo "Goedemorgen,"; 
+                  } 
+               elseif($tijd < 18)   
+                  { 
+                        echo "Goedemiddag,"; 
+                  } 
+               else 
+                  { 
+                        echo "Goedeavond,";   
+                  } 
+               ?> 
+            <?php echo $_SESSION['name']; ?><br>
+            In het MEOS systeem van <?php echo $site_name; ?>
+         </h1>
+         <b><u>Dit systeem is uitsluitend voor geautoriseerd gebruik. Misbruik van dit systeem kan leiden tot ontslag en/of strafvervolging</u></b><br>
+         <?php
+            if ($_SESSION['role'] != "anwb") {
+            ?>
+         <h1></br> Algemene Notities</h1>
+         <form method="POST">
+            <textarea name="anotitie" class="form-control" placeholder="Notitie"></textarea>
+            </p>
+            <input type="submit" class="btn btn-success" value="Opslaan">
+         </form>
+         <hr>
+         <?php
+            $getNotities = $con->query("SELECT n.id as nid, u.id, u.name, n.text, n.date FROM anotitie AS n INNER JOIN users AS u ON u.id=n.user_id ORDER BY n.id DESC LIMIT 10");
+            while ($row = $getNotities->fetch_assoc()) {
+             ?>
+         <b><?php echo htmlspecialchars($row['name']); ?></b> - <em><?php echo $row['date']; ?> <?php if ($_SESSION['id'] == $row['id'] OR $_SESSION['role'] == "admin") { echo "<a href='?action=deleteanotitie&id=".$row['nid']."'>(verwijder)</a>"; } ?></em> <br>
+         <?php echo htmlspecialchars($row['text']); ?>
+         <hr>
+         <?php
+            }
+            ?>
+         <?php } ?>
          <footer class="sticky-footer">
             <div class="container">
                <div class="text-center">
@@ -262,7 +215,6 @@
                </div>
             </div>
          </footer>
-         
          <!-- Scroll to Top Button-->
          <a class="scroll-to-top rounded" href="#page-top">
          <i class="fa fa-angle-up"></i>

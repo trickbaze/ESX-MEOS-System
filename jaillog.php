@@ -11,7 +11,6 @@ $jailq = $ddcon->query("SELECT jail.identifier, jail_time, users.name FROM jail 
 $invorderq = $con->query("SELECT burger, agent, datetime FROM invorderlog");
 $huiszoekq = $con->query("SELECT burger, agent, datetime FROM huiszoekinglog WHERE burger != ''");
 $beslagq = $con->query("SELECT burger, agent, datetime, kenteken, voertuig FROM beslaglog ORDER BY datetime ASC");
-$zoeklogq = $con->query("SELECT agent, burger, datetime, burgerid FROM livelog WHERE burger != '' ORDER BY datetime DESC LIMIT 25");
 ?>
 <!DOCTYPE html>
 <html lang="en">

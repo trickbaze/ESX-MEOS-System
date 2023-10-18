@@ -384,10 +384,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		  </tr>
 		  <?php } ?>
 		</table>
-		<?php if (@$_SESSION['admin'] == true) { ?>
+		<?php if (@$_SESSION['trainer'] == true) { ?>
 		<button onclick="$('#addModal').modal();" class="btn btn-primary">Kandidaat toevoegen</button>
 		<?php } ?>
-		<?php if (@$_SESSION['admin'] == true) { ?>
+		<?php if (@$_SESSION['trainer'] == true) { ?>
 		<button onclick="$('#createModal').modal();" class="btn btn-success">Creëer specialisatie</button>
 		<?php } ?>
 	  </div>

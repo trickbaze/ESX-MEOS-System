@@ -9,19 +9,19 @@ error_reporting(0);
 
 
 // Meos database
-$db_host = "";
-$db_user = "";
+$db_host = "localhost";
+$db_user = "root";
 $db_pass = "";
-$db_data = "";
+$db_data = "meos";
 
 $con = new mysqli($db_host,$db_user,$db_pass,$db_data);
 
 // Fivem ESX database
 $dd = array(
-"host" => "",
-"user" => "",
+"host" => "localhost",
+"user" => "root",
 "pass" => "",
-"data" => ""
+"data" => "fivem"
 );
 
 $ddcon = new mysqli($dd['host'],$dd['user'],$dd['pass'],$dd['data']);
