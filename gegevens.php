@@ -14,7 +14,7 @@
    
    if (@$_GET['action'] == "delete") {
    	$delete = $con->query("DELETE FROM informatie WHERE id='".$con->real_escape_string($_GET['verbaal'])."'");
-   	Header("Location: gegevens?id=".$_GET['persoon']);
+   	Header("Location: gegevens.php?id=".$_GET['persoon']);
    }
    
    if (@$_GET['action'] == "delfine") {
@@ -23,14 +23,14 @@
    	} else {
    		$ddcon->query("DELETE FROM billing WHERE id='".$ddcon->real_escape_string($_GET['id'])."'");
    	}
-   	Header("Location: gegevens?id=".$_GET['persoon']);
+   	Header("Location: gegevens.php?id=".$_GET['persoon']);
    }
    
    if (@$_GET['action'] == "beslag") {
    	//exit;
    	$ddcon->query("DELETE FROM owned_vehicles WHERE id='".$ddcon->real_escape_string($_GET['id'])."'");
    	$con->query("INSERT INTO beslaglog (ip,agent,burger,kenteken,voertuig) VALUES ('".$_SERVER['REMOTE_ADDR']."','".$con->real_escape_string($_SESSION['name'])."','".$con->real_escape_string($_GET['user'])."','".$con->real_escape_string($_GET['kenteken'])."','".$con->real_escape_string($_GET['voertuig'])."')");
-   	Header("Location: gegevens?id=".$_GET['persoon']);
+   	Header("Location: gegevens.php?id=".$_GET['persoon']);
    
    }
    
@@ -44,12 +44,12 @@
    	$ddcon->query("DELETE FROM user_licenses WHERE owner='".$ddcon->real_escape_string($_GET['owner'])."' AND type='drive'"); //B
    	$ddcon->query("DELETE FROM user_licenses WHERE owner='".$ddcon->real_escape_string($_GET['owner'])."' AND type='bus'"); //Bus
    	$con->query("INSERT INTO invorderlog (agent,burger,ip) VALUES ('".$_SESSION['username']."(".$_SESSION['name'].")','".$con->real_escape_string($_GET['owner'])."','".$_SERVER['REMOTE_ADDR']."')");
-   	Header("Location: gegevens?id=".$_GET['persoon']);
+   	Header("Location: gegevens.php?id=".$_GET['persoon']);
    }
    
    if (@$_GET['action'] == "designal") {
    	$con->query("UPDATE informatie SET gesignaleerd = null WHERE gameid = '".$_GET['gameid']."'");
-   	Header("Location: gegevens?id=".$_GET['gameid']);
+   	Header("Location: gegevens.php?id=".$_GET['gameid']);
    }
    
    if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -81,9 +81,9 @@
    		");
    		
    		if ($insert) {
-   			Header("Location:gegevens?id=".$_POST['gameid']."&status=ok");
+   			Header("Location:gegevens.php?id=".$_POST['gameid']."&status=ok");
    		} else {
-   			Header("Location:gegevens?id=".$_POST['gameid']."&status=kut");
+   			Header("Location:gegevens.php?id=".$_POST['gameid']."&status=kut");
    		}
    	}
    	
@@ -106,9 +106,9 @@
    		");
    		
    		if ($insert) {
-   			Header("Location:gegevens?id=".$_POST['gameid']."&status=ok2");
+   			Header("Location:gegevens.php?id=".$_POST['gameid']."&status=ok2");
    		} else {
-   			Header("Location:gegevens?id=".$_POST['gameid']."&status=kut2");
+   			Header("Location:gegevens.php?id=".$_POST['gameid']."&status=kut2");
    		}
    	}
    	
@@ -128,9 +128,9 @@
    		");
    		
    		if ($insert) {
-   			Header("Location:gegevens?id=".$_POST['persoon']."&status=ok");
+   			Header("Location:gegevens.php?id=".$_POST['persoon']."&status=ok");
    		} else {
-   			Header("Location:gegevens?id=".$_POST['persoon']."&status=kut");
+   			Header("Location:gegevens.php?id=".$_POST['persoon']."&status=kut");
    		}
    	}
    	
